@@ -33,6 +33,18 @@ a{color:inherit;text-decoration:none} button{font:inherit} img,video{display:blo
 .logo-stage{width:min(720px,84vw);height:min(410px,48vw);min-height:260px;margin:0 auto 10px;perspective:1400px;cursor:grab;touch-action:none;user-select:none}.logo-stage.dragging{cursor:grabbing}
 .logo-object{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .18s ease-out;filter:drop-shadow(0 34px 60px rgba(0,0,0,.34))}.logo-face,.logo-depth{position:absolute;inset:0;display:grid;place-items:center;backface-visibility:hidden;transform-style:preserve-3d}.logo-face img,.logo-depth img{width:100%;pointer-events:none}.logo-face.front{transform:translateZ(14px)}.logo-face.back{transform:rotateY(180deg) translateZ(14px)}.logo-face.back img{filter:brightness(.86)}
 .logo-depth{opacity:.28;filter:brightness(.35) saturate(.8)}.logo-depth.d1{transform:translateZ(-12px)}.logo-depth.d2{transform:translateZ(-8px)}.logo-depth.d3{transform:translateZ(-4px)}.logo-depth.d4{transform:translateZ(0)}.logo-depth.d5{transform:translateZ(4px)}
+.logo-stage.logo-entry{animation:logoDropIn 1.75s cubic-bezier(.16,.88,.23,1) both;will-change:transform,opacity,filter}
+@keyframes logoDropIn{
+  0%{opacity:0;transform:translateY(-62vh) scale(.88);filter:brightness(3.4) saturate(.35) drop-shadow(0 0 75px rgba(92,220,255,.95))}
+  58%{opacity:1;transform:translateY(18px) scale(1.035);filter:brightness(2.15) saturate(.65) drop-shadow(0 0 58px rgba(70,198,230,.78))}
+  78%{transform:translateY(-7px) scale(.995);filter:brightness(1.35) saturate(.88) drop-shadow(0 0 28px rgba(47,160,188,.42))}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) saturate(1) drop-shadow(0 0 0 rgba(0,0,0,0))}
+}
+.gate-interior,.gate-films{display:none}
+.gate-interior.unlocked,.gate-films.unlocked{display:block}
+.door-scene,.camera-scene{cursor:pointer}
+@media (prefers-reduced-motion:reduce){.logo-stage.logo-entry{animation:none}}
+
 .rotate-hint{margin-top:-8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42)}
 .hero h1{font-size:clamp(36px,6vw,86px);line-height:.95;letter-spacing:-.055em;margin:18px 0 0;font-weight:640}.hero p{max-width:720px;margin:20px auto 0;color:rgba(255,255,255,.66);font-size:clamp(15px,1.7vw,20px);line-height:1.75}
 .hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}.pill{display:inline-flex;align-items:center;justify-content:center;min-width:170px;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.055);color:#fff;backdrop-filter:blur(12px);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.pill.primary{background:#fff;color:#102026;border-color:#fff}
@@ -83,7 +95,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <nav class="nav" id="nav">
   <a class="brand-mini" href="#top"><span class="brand-dot"></span><span data-i18n="brandMini">Arch Mohammed Warda</span></a>
   <div class="nav-right">
-    <div class="navlinks"><a href="#exterior" data-i18n="navExterior">Exterior</a><a href="#interiorFeatured" data-i18n="navInterior">Interior</a><a href="#films" data-i18n="navFilms">AI Films</a><a href="#about" data-i18n="navContact">Contact</a></div>
+    <div class="navlinks"><a href="#exterior" data-i18n="navExterior">Exterior</a><a href="#doorPortal" data-portal-nav="interior" data-i18n="navInterior">Interior</a><a href="#filmPortal" data-portal-nav="films" data-i18n="navFilms">AI Films</a><a href="#about" data-i18n="navContact">Contact</a></div>
     <div class="lang-toggle"><button class="lang-btn active" data-lang="en">EN</button><button class="lang-btn" data-lang="ar">AR</button></div>
   </div>
 </nav>
@@ -92,7 +104,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
   <div class="hero-orb one"></div><div class="hero-orb two"></div>
   <div class="hero-content">
     <div class="eyebrow" data-i18n="eyebrow">Architectural Visualization Portfolio · 2026</div>
-    <div class="logo-stage" id="logoStage" aria-label="Interactive 360 degree logo">
+    <div class="logo-stage logo-entry" id="logoStage" aria-label="Interactive 360 degree logo">
       <div class="logo-object" id="logoObject">
         <div class="logo-depth d1"><img src="assets/brand/logo-3d-final.png" alt=""></div><div class="logo-depth d2"><img src="assets/brand/logo-3d-final.png" alt=""></div><div class="logo-depth d3"><img src="assets/brand/logo-3d-final.png" alt=""></div><div class="logo-depth d4"><img src="assets/brand/logo-3d-final.png" alt=""></div><div class="logo-depth d5"><img src="assets/brand/logo-3d-final.png" alt=""></div>
         <div class="logo-face front"><img src="assets/brand/logo-3d-final.png" alt="Arch Mohammed Warda logo"></div><div class="logo-face back"><img src="assets/brand/logo-3d-final.png" alt=""></div>
@@ -132,16 +144,16 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 
 <section class="portal" id="doorPortal">
   <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)" data-i18n="doorKicker">Transition 01 · Exterior → Interior</div><h3 data-i18n="doorTitle">Enter through the architecture.</h3><p data-i18n="doorDesc">Open the branded door to move from the exterior world into the interior collection.</p></div>
-  <div class="door-scene reveal" id="doorScene"><div class="door-room"></div><div class="door-frame"></div><div class="door"><img class="door-logo" src="assets/brand/logo-3d-final.png" alt="MW logo"><span class="door-handle"></span></div><button class="door-enter" id="doorEnter" data-i18n="doorEnter">Open door · Enter Interior</button></div>
+  <div class="door-scene reveal" id="doorScene" role="button" tabindex="0" aria-label="Enter Interior"><div class="door-room"></div><div class="door-frame"></div><div class="door"><img class="door-logo" src="assets/brand/logo-3d-final.png" alt="MW logo"><span class="door-handle"></span></div><button class="door-enter" id="doorEnter" data-i18n="doorEnter">Open door · Enter Interior</button></div>
 </section>
 <div class="portal-flash" id="portalFlash"></div>
 
-<section class="section interior-featured" id="interiorFeatured"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inFeaturedKicker">04 · Interior / Featured</div><h2 data-i18n="inFeaturedTitle">Main Living Space</h2></div><p class="section-desc" data-i18n="inFeaturedDesc">IN1 is the primary interior project, presented as a continuous study of light, furniture, material texture and spatial atmosphere.</p></div>
+<section class="section interior-featured gate-interior" id="interiorFeatured" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inFeaturedKicker">04 · Interior / Featured</div><h2 data-i18n="inFeaturedTitle">Main Living Space</h2></div><p class="section-desc" data-i18n="inFeaturedDesc">IN1 is the primary interior project, presented as a continuous study of light, furniture, material texture and spatial atmosphere.</p></div>
 <div class="interior-hero reveal"><img loading="lazy" decoding="async" src="assets/interior/vray/IN1/IN1-01.jpg" alt="Main living interior"><div class="interior-hero-copy"><h3 data-i18n="in1Hero">Warm Minimal Living</h3><div>V-Ray Interior · Featured Space</div></div></div>
 <div class="story-stack"><aside class="story-sticky reveal"><h4 data-i18n="in1StoryTitle">A calm material story.</h4><p data-i18n="in1StoryDesc">Soft neutral upholstery, warm timber, controlled linear lighting and sculptural furniture are revealed progressively as the visitor scrolls.</p><button class="text-btn" data-project="IN1" data-i18n="viewInteriorStory">View all IN1 frames →</button></aside><div class="story-images"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-03.jpg" alt="Living room"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-07.jpg" alt="Living room overview"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-05.jpg" alt="Material detail"></div></div>
 </div></section>
 
-<section class="section interior-vray"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" style="color:rgba(255,255,255,.48)" data-i18n="inVrayKicker">05 · Interior / V-Ray</div><h2 data-i18n="inVrayTitle">Rooms with distinct character.</h2></div><p class="section-desc" data-i18n="inVrayDesc">Bedroom, bathroom, kitchen and bedroom-study projects presented as focused interior case studies.</p></div>
+<section class="section interior-vray gate-interior" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" style="color:rgba(255,255,255,.48)" data-i18n="inVrayKicker">05 · Interior / V-Ray</div><h2 data-i18n="inVrayTitle">Rooms with distinct character.</h2></div><p class="section-desc" data-i18n="inVrayDesc">Bedroom, bathroom, kitchen and bedroom-study projects presented as focused interior case studies.</p></div>
 <div class="project-grid">
 <article class="project interior-card reveal"><div class="project-card" data-project="IN2"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-01.jpg" alt="Bedroom suite"><div class="project-info"><div><div class="project-name" data-i18n="in2Name">Bedroom Suite</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN2</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-03.jpg" alt=""></div></article>
 <article class="project interior-card reveal"><div class="project-card" data-project="IN3"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-01.jpg" alt="Bathroom"><div class="project-info"><div><div class="project-name" data-i18n="in3Name">Statement Bathroom</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN3</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-03.jpg" alt=""></div></article>
@@ -149,18 +161,18 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <article class="project interior-card reveal"><div class="project-card" data-project="IN5"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-01.jpg" alt="Bedroom study"><div class="project-info"><div><div class="project-name" data-i18n="in5Name">Bedroom & Study</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN5</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-03.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-04.jpg" alt=""></div></article>
 </div></div></section>
 
-<section class="section interior-ai"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inAiKicker">06 · Interior / AI</div><h2 data-i18n="inAiTitle">AI-driven interior concepts.</h2></div><p class="section-desc" data-i18n="inAiDesc">Commercial and residential interior concepts extend the portfolio into AI-assisted spatial storytelling.</p></div>
+<section class="section interior-ai gate-interior" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inAiKicker">06 · Interior / AI</div><h2 data-i18n="inAiTitle">AI-driven interior concepts.</h2></div><p class="section-desc" data-i18n="inAiDesc">Commercial and residential interior concepts extend the portfolio into AI-assisted spatial storytelling.</p></div>
 <div class="project-grid">
 <article class="project reveal" style="grid-column:span 6"><div class="project-card" data-project="INAI1"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-01.jpg" alt="Fashion boutique"><div class="project-info"><div><div class="project-name" data-i18n="inAi1Name">Fashion Boutique</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 01</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-03.jpg" alt=""></div></article>
 <article class="project reveal" style="grid-column:span 6"><div class="project-card" data-project="INAI2"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-01.jpg" alt="Double height residence"><div class="project-info"><div><div class="project-name" data-i18n="inAi2Name">Double-Height Residence</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-04.jpg" alt=""></div></article>
 </div></div></section>
 
-<section class="film-portal" id="filmPortal">
+<section class="film-portal gate-interior" id="filmPortal" aria-hidden="true">
   <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)" data-i18n="filmPortalKicker">Transition 02 · Still Image → Motion</div><h3 data-i18n="filmPortalTitle">Enter AI Motion.</h3><p data-i18n="filmPortalDesc">Activate the branded camera to move from still visualization into architectural films.</p></div>
-  <div class="camera-scene reveal" id="cameraScene"><div class="camera-object" id="cameraObject"><div class="camera-top"></div><div class="camera-body"><span class="camera-rec"></span><img class="camera-brand" src="assets/brand/logo-3d-final.png" alt="MW brand"></div><div class="camera-lens"></div></div><button class="camera-enter" id="cameraEnter" data-i18n="cameraEnter">Activate Camera · Enter Films</button></div>
+  <div class="camera-scene reveal" id="cameraScene" role="button" tabindex="0" aria-label="Enter Films"><div class="camera-object" id="cameraObject"><div class="camera-top"></div><div class="camera-body"><span class="camera-rec"></span><img class="camera-brand" src="assets/brand/logo-3d-final.png" alt="MW brand"></div><div class="camera-lens"></div></div><button class="camera-enter" id="cameraEnter" data-i18n="cameraEnter">Activate Camera · Enter Films</button></div>
 </section>
 
-<section class="section films" id="films"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" style="color:rgba(255,255,255,.45)" data-i18n="filmsKicker">07 · AI Architectural Films</div><h2 data-i18n="filmsTitle">Projects in motion.</h2></div><p class="section-desc" data-i18n="filmsDesc">Exterior, interior, transformation and construction stories produced as cinematic AI-driven architectural films.</p></div>
+<section class="section films gate-films" id="films" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" style="color:rgba(255,255,255,.45)" data-i18n="filmsKicker">07 · AI Architectural Films</div><h2 data-i18n="filmsTitle">Projects in motion.</h2></div><p class="section-desc" data-i18n="filmsDesc">Exterior, interior, transformation and construction stories produced as cinematic AI-driven architectural films.</p></div>
 <div class="film-hero reveal" data-video="assets/videos/film-01-exterior.mp4" data-video-title="Exterior Villa Reveal"><img loading="lazy" decoding="async" src="assets/video-posters/film-01.jpg" alt="Exterior film"><div class="play-ring">▶</div><div class="film-hero-meta"><div><h3 data-i18n="film1Title">Exterior Villa Reveal</h3><p data-i18n="film1Tag">Exterior · AI Architectural Film</p></div><span class="feature-badge">FILM 01</span></div></div>
 <div class="film-grid">
 <article class="film-card reveal" data-video="assets/videos/film-02-exterior-masterplan.mp4" data-video-title="Exterior Journey"><img loading="lazy" decoding="async" src="assets/video-posters/film-02.jpg" alt="Exterior masterplan film"><div class="play-ring">▶</div><div class="film-meta"><h4 data-i18n="film2Title">Exterior Journey</h4><p data-i18n="film2Tag">Aerial → Villa · AI Film</p></div></article>
@@ -170,7 +182,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 </div></div></section>
 </main>
 
-<section class="about" id="about"><div class="about-grid reveal"><div class="portrait"><img loading="lazy" decoding="async" src="assets/brand/portrait-final.png" alt="Arch Mohammed Warda"><div class="portrait-note" data-i18n="portraitNote">Professional closing portrait · grey suit, white shirt and teal tie</div></div><div class="about-copy"><div class="kicker" style="color:rgba(255,255,255,.48)" data-i18n="aboutKicker">Arch Mohammed Warda</div><h2 data-i18n="aboutTitle">Let’s create the next space.</h2><p data-i18n="aboutDesc">Exterior visualization, interior design and cinematic AI motion brought together as one architectural portfolio experience.</p><div class="contact-list"><a href="tel:+971502237175"><span class="contact-label" data-i18n="uae">UAE</span><span class="contact-value">+971 50 223 7175</span></a><a href="tel:+96367844352"><span class="contact-label" data-i18n="syria">Syria</span><span class="contact-value">+963 67844352</span></a><a href="mailto:mohammedwarda049@gmail.com"><span class="contact-label">Email</span><span class="contact-value">mohammedwarda049@gmail.com</span></a><a href="https://www.instagram.com/warda5521/" target="_blank" rel="noopener"><span class="contact-label">Instagram</span><span class="contact-value">@warda5521 ↗</span></a></div></div></div></section>
+<section class="about" id="about"><div class="about-grid reveal"><div class="portrait"><img loading="lazy" decoding="async" src="assets/brand/portrait-final.png" alt="Arch Mohammed Warda"></div><div class="about-copy"><div class="kicker" style="color:rgba(255,255,255,.48)" data-i18n="aboutKicker">Arch Mohammed Warda</div><h2 data-i18n="aboutTitle">Let’s create the next space.</h2><p data-i18n="aboutDesc">Exterior visualization, interior design and cinematic AI motion brought together as one architectural portfolio experience.</p><div class="contact-list"><a href="https://wa.me/971502237175" target="_blank" rel="noopener" aria-label="WhatsApp UAE +971 50 223 7175"><span class="contact-label" data-i18n="uae">UAE</span><span class="contact-value">+971 50 223 7175 ↗</span></a><a href="https://wa.me/96367844352" target="_blank" rel="noopener" aria-label="WhatsApp Syria +963 67844352"><span class="contact-label" data-i18n="syria">Syria</span><span class="contact-value">+963 67844352 ↗</span></a><a href="mailto:mohammedwarda049@gmail.com"><span class="contact-label">Email</span><span class="contact-value">mohammedwarda049@gmail.com</span></a><a href="https://www.instagram.com/warda5521/" target="_blank" rel="noopener"><span class="contact-label">Instagram</span><span class="contact-value">@warda5521 ↗</span></a></div></div></div></section>
 <footer class="footer"><div class="footer-inner"><span data-i18n="footerLeft">© 2026 Arch Mohammed Warda</span><span data-i18n="footerRight">Architecture · Visualization · AI Motion</span></div></footer>
 
 <div class="modal" id="galleryModal" aria-hidden="true"><div class="modal-inner"><div class="modal-head"><div class="modal-title" id="galleryTitle">Project</div><button class="close" data-close="galleryModal">×</button></div><div class="gallery" id="gallery"></div></div></div>
@@ -184,7 +196,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 
 // 360 logo drag
 const stage=document.getElementById('logoStage'), logo=document.getElementById('logoObject'); let rx=-3,ry=0,drag=false,sx=0,sy=0,orx=0,ory=0;
-const applyLogo=()=>logo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; applyLogo();
+const applyLogo=()=>logo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; applyLogo(); stage.addEventListener('animationend',()=>stage.classList.remove('logo-entry'),{once:true});
 if(!reduced){stage.addEventListener('pointerdown',e=>{drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;stage.setPointerCapture(e.pointerId)});stage.addEventListener('pointermove',e=>{if(drag){ry=ory+(e.clientX-sx)*.58;rx=Math.max(-75,Math.min(75,orx-(e.clientY-sy)*.38))}else{const r=stage.getBoundingClientRect();ry=((e.clientX-r.left)/r.width-.5)*42;rx=-((e.clientY-r.top)/r.height-.5)*20}applyLogo()});stage.addEventListener('pointerup',e=>{drag=false;stage.classList.remove('dragging');try{stage.releasePointerCapture(e.pointerId)}catch{}})}
 
 const projects={
@@ -194,12 +206,47 @@ IN1:{title:'IN1 · Main Living Space',count:7,path:'assets/interior/vray/IN1/IN1
 const gm=document.getElementById('galleryModal'),gallery=document.getElementById('gallery'),gt=document.getElementById('galleryTitle');
 function openProject(key){const p=projects[key];if(!p)return;gt.textContent=p.title;gallery.innerHTML='';for(let i=1;i<=p.count;i++){const n=p.pad?String(i).padStart(2,'0'):i;const im=document.createElement('img');im.src=p.path+n+'.jpg';im.alt=p.title+' '+i;if(i===1&&p.count>3)im.classList.add('wide');gallery.appendChild(im)}gm.classList.add('open');gm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'} document.querySelectorAll('[data-project]').forEach(el=>el.addEventListener('click',()=>openProject(el.dataset.project)));
 
-// Door portal
-const doorScene=document.getElementById('doorScene'),doorEnter=document.getElementById('doorEnter'),flash=document.getElementById('portalFlash'); doorEnter.addEventListener('click',()=>{doorScene.classList.add('open');setTimeout(()=>flash.classList.add('go'),650);setTimeout(()=>document.getElementById('interiorFeatured').scrollIntoView({behavior:reduced?'auto':'smooth'}),1020);setTimeout(()=>{flash.classList.remove('go');doorScene.classList.remove('open')},1900)});
+// Locked architectural portals: Interior and Films are revealed only through their branded icons.
+const interiorSections=[...document.querySelectorAll('.gate-interior')];
+const filmSections=[...document.querySelectorAll('.gate-films')];
+let interiorUnlocked=false,filmsUnlocked=false;
+
+function revealGroup(nodes){
+  nodes.forEach(el=>{el.classList.add('unlocked');el.setAttribute('aria-hidden','false')});
+}
+
+const doorScene=document.getElementById('doorScene'),doorEnter=document.getElementById('doorEnter'),flash=document.getElementById('portalFlash');
+function enterInterior(){
+  if(!interiorUnlocked){interiorUnlocked=true;revealGroup(interiorSections)}
+  doorScene.classList.add('open');
+  setTimeout(()=>flash.classList.add('go'),650);
+  setTimeout(()=>document.getElementById('interiorFeatured').scrollIntoView({behavior:reduced?'auto':'smooth'}),1020);
+  setTimeout(()=>{flash.classList.remove('go');doorScene.classList.remove('open')},1900);
+}
+doorEnter.addEventListener('click',e=>{e.stopPropagation();enterInterior()});
+doorScene.addEventListener('click',e=>{if(e.target!==doorEnter)enterInterior()});
+doorScene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enterInterior()}});
 
 // Camera portal
-const cameraScene=document.getElementById('cameraScene'),cameraEnter=document.getElementById('cameraEnter'),cameraObject=document.getElementById('cameraObject'); if(!reduced){cameraScene.addEventListener('pointermove',e=>{const r=cameraScene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;cameraObject.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg)`});cameraScene.addEventListener('pointerleave',()=>cameraObject.style.transform='rotateY(0) rotateX(0)')}
-cameraEnter.addEventListener('click',()=>{cameraScene.classList.add('activated');setTimeout(()=>document.getElementById('films').scrollIntoView({behavior:reduced?'auto':'smooth'}),820);setTimeout(()=>cameraScene.classList.remove('activated'),1800)});
+const cameraScene=document.getElementById('cameraScene'),cameraEnter=document.getElementById('cameraEnter'),cameraObject=document.getElementById('cameraObject');
+if(!reduced){cameraScene.addEventListener('pointermove',e=>{const r=cameraScene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;cameraObject.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg)`});cameraScene.addEventListener('pointerleave',()=>cameraObject.style.transform='rotateY(0) rotateX(0)')}
+function enterFilms(){
+  if(!interiorUnlocked){document.getElementById('doorPortal').scrollIntoView({behavior:reduced?'auto':'smooth'});return}
+  if(!filmsUnlocked){filmsUnlocked=true;revealGroup(filmSections)}
+  cameraScene.classList.add('activated');
+  setTimeout(()=>document.getElementById('films').scrollIntoView({behavior:reduced?'auto':'smooth'}),820);
+  setTimeout(()=>cameraScene.classList.remove('activated'),1800);
+}
+cameraEnter.addEventListener('click',e=>{e.stopPropagation();enterFilms()});
+cameraScene.addEventListener('click',e=>{if(e.target!==cameraEnter)enterFilms()});
+cameraScene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enterFilms()}});
+
+// Navigation points to the portals, never directly into locked sections.
+document.querySelectorAll('[data-portal-nav]').forEach(link=>link.addEventListener('click',e=>{
+  e.preventDefault();
+  const target=link.dataset.portalNav==='films'&&interiorUnlocked?'filmPortal':'doorPortal';
+  document.getElementById(target).scrollIntoView({behavior:reduced?'auto':'smooth'});
+}));
 
 // Film player
 const vm=document.getElementById('videoModal'),vp=document.getElementById('videoPlayer'),vt=document.getElementById('videoTitle');document.querySelectorAll('[data-video]').forEach(el=>el.addEventListener('click',()=>{vt.textContent=el.dataset.videoTitle||'Film';vp.src=el.dataset.video;vm.classList.add('open');vm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';vp.play().catch(()=>{})}));
