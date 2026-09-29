@@ -216,8 +216,8 @@ const nav=document.getElementById('nav'); const reduced=matchMedia('(prefers-red
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}); document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// 360 logo drag + cinematic dust + slow automatic rotation
-const stage=document.getElementById('logoStage'), logo=document.getElementById('logoObject'); let rx=-3,ry=0,drag=false,sx=0,sy=0,orx=0,ory=0,autoReady=false,lastAuto=performance.now();
+// 360 logo drag + cinematic dust — manual interaction only
+const stage=document.getElementById('logoStage'), logo=document.getElementById('logoObject'); let rx=-3,ry=0,drag=false,sx=0,sy=0,orx=0,ory=0;
 const depthStack=document.getElementById('logoDepthStack');
 if(depthStack && !depthStack.childElementCount){
   const totalSlices=18;
@@ -256,8 +256,6 @@ function finishLogoIntro(){
   if(introFinished)return;
   introFinished=true;
   stage.classList.remove('logo-entry');
-  autoReady=true;
-  lastAuto=performance.now();
   applyLogo();
 }
 logo.addEventListener('animationend',e=>{if(e.animationName==='logoMaterialize')finishLogoIntro()});
@@ -265,22 +263,12 @@ setTimeout(finishLogoIntro,3400);
 if(reduced){finishLogoIntro()}
 
 if(!reduced){
-  stage.addEventListener('pointerdown',e=>{drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;stage.setPointerCapture(e.pointerId)});
+  stage.addEventListener('pointerdown',e=>{finishLogoIntro();drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;try{stage.setPointerCapture(e.pointerId)}catch{}});
   stage.addEventListener('pointermove',e=>{if(drag){ry=ory+(e.clientX-sx)*.58;rx=Math.max(-68,Math.min(68,orx-(e.clientY-sy)*.38));applyLogo()}});
-  stage.addEventListener('pointerup',e=>{drag=false;stage.classList.remove('dragging');lastAuto=performance.now();try{stage.releasePointerCapture(e.pointerId)}catch{}});
-  stage.addEventListener('pointercancel',()=>{drag=false;stage.classList.remove('dragging');lastAuto=performance.now()});
+  stage.addEventListener('pointerup',e=>{drag=false;stage.classList.remove('dragging');try{stage.releasePointerCapture(e.pointerId)}catch{}});
+  stage.addEventListener('pointercancel',()=>{drag=false;stage.classList.remove('dragging')});
 }
 
-function autoRotateLogo(now){
-  if(autoReady && !drag){
-    const dt=Math.min(40,now-lastAuto);
-    ry+=dt*0.0042;
-    applyLogo();
-  }
-  lastAuto=now;
-  requestAnimationFrame(autoRotateLogo);
-}
-if(!reduced)requestAnimationFrame(autoRotateLogo);
 
 const projects={
 V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V1/V1-',pad:true},V2:{title:'Villa 02 · V-Ray Exterior',count:3,path:'assets/projects/V2/V2-'},V3:{title:'Villa 03 · V-Ray Exterior',count:3,path:'assets/projects/V3/V3-'},V4:{title:'Villa 04 · V-Ray Exterior',count:3,path:'assets/projects/V4/V4-'},V5:{title:'Villa 05 · AI Exterior',count:3,path:'assets/projects/V5/V5-'},V6:{title:'Villa 06 · AI Exterior',count:3,path:'assets/projects/V6/V6-'},V7:{title:'Villa 07 · AI Exterior',count:3,path:'assets/projects/V7/V7-'},
