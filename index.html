@@ -251,8 +251,18 @@ if(dust && !reduced && !dust.childElementCount){
 
 const applyLogo=()=>{logo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; const nx=Math.max(-1,Math.min(1,ry/70)), ny=Math.max(-1,Math.min(1,rx/70)); stage.style.setProperty('--shine-x',`${50 + nx*24}%`); stage.style.setProperty('--shine-y',`${34 - ny*18}%`); stage.style.setProperty('--edge-alpha',`${0.22 + Math.abs(nx)*0.48}`)}; applyLogo();
 
-stage.addEventListener('animationend',e=>{if(e.animationName==='logoMaterialize'){stage.classList.remove('logo-entry');autoReady=true;lastAuto=performance.now()}},{once:true});
-if(reduced){stage.classList.remove('logo-entry')}
+let introFinished=false;
+function finishLogoIntro(){
+  if(introFinished)return;
+  introFinished=true;
+  stage.classList.remove('logo-entry');
+  autoReady=true;
+  lastAuto=performance.now();
+  applyLogo();
+}
+logo.addEventListener('animationend',e=>{if(e.animationName==='logoMaterialize')finishLogoIntro()});
+setTimeout(finishLogoIntro,3400);
+if(reduced){finishLogoIntro()}
 
 if(!reduced){
   stage.addEventListener('pointerdown',e=>{drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;stage.setPointerCapture(e.pointerId)});
