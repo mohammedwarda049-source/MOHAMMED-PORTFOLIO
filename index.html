@@ -33,17 +33,32 @@ a{color:inherit;text-decoration:none} button{font:inherit} img,video{display:blo
 .logo-stage{width:min(720px,84vw);height:min(410px,48vw);min-height:260px;margin:0 auto 10px;perspective:2000px;cursor:grab;touch-action:none;user-select:none;--shine-x:50%;--shine-y:34%;--edge-alpha:.28}.logo-stage.dragging{cursor:grabbing}
 .logo-object{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .18s ease-out;filter:drop-shadow(0 42px 70px rgba(0,0,0,.36))}.logo-base-shadow{position:absolute;left:8%;right:8%;bottom:6%;height:26%;transform:translateZ(-58px) rotateX(83deg);background:radial-gradient(ellipse at center,rgba(0,0,0,.44),rgba(0,0,0,.18) 42%,transparent 72%);filter:blur(18px);opacity:.78;pointer-events:none}.logo-depth-stack,.logo-face,.logo-specular,.logo-rim{position:absolute;inset:0;display:grid;place-items:center;backface-visibility:hidden;transform-style:preserve-3d}.logo-face img,.logo-slice img{width:100%;pointer-events:none;display:block}.logo-face.front{transform:translateZ(22px)}.logo-face.back{transform:rotateY(180deg) translateZ(22px)}.logo-face.back img{filter:brightness(.72) saturate(.9)}
 .logo-depth-stack{pointer-events:none}.logo-slice{position:absolute;inset:0;display:grid;place-items:center;backface-visibility:hidden;transform-style:preserve-3d;opacity:.92}.logo-slice img{filter:brightness(var(--slice-bright,.32)) saturate(var(--slice-sat,.82))}.logo-rim{top:14%;bottom:14%;width:34px;border-radius:999px;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(55,164,188,.22) 36%,rgba(6,17,21,.06) 58%,rgba(0,0,0,.18));filter:blur(1px);opacity:var(--edge-alpha);mix-blend-mode:screen}.logo-rim.rim-left{left:6%;inset-inline-start:6%;inset-inline-end:auto;transform:rotateY(90deg) translateX(-10px)}.logo-rim.rim-right{right:6%;inset-inline-end:6%;inset-inline-start:auto;transform:rotateY(90deg) translateX(10px)}.logo-specular{pointer-events:none;transform:translateZ(26px);background:radial-gradient(circle at var(--shine-x) var(--shine-y),rgba(255,255,255,.55) 0 10%,rgba(255,255,255,.16) 16%,transparent 30%),linear-gradient(115deg,transparent 34%,rgba(255,255,255,.12) 48%,transparent 60%);mix-blend-mode:screen;opacity:.88}
-.logo-stage.logo-entry{animation:logoDropIn 1.75s cubic-bezier(.16,.88,.23,1) both;will-change:transform,opacity,filter}
+.logo-stage.logo-entry{animation:logoDropIn 2.25s cubic-bezier(.16,.88,.23,1) both;will-change:transform,opacity,filter}
+.logo-dust{position:absolute;inset:-34% -18% -12%;z-index:8;overflow:visible;pointer-events:none;filter:blur(.2px);opacity:0;transform-style:preserve-3d}
+.logo-stage.logo-entry .logo-dust{animation:dustLayerIn 2.65s ease-out both}
+.logo-dust span{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,rgba(116,226,255,.98) 0 18%,rgba(41,157,187,.72) 36%,rgba(15,93,112,.26) 62%,transparent 76%);box-shadow:0 0 14px rgba(58,188,219,.66),0 0 34px rgba(29,125,147,.28);opacity:0;transform:translate3d(var(--dx),var(--dy0),var(--z)) scale(.35);animation:dustParticle var(--dur) cubic-bezier(.15,.7,.18,1) var(--delay) both;mix-blend-mode:screen}
+.logo-dust:before,.logo-dust:after{content:"";position:absolute;left:50%;top:7%;transform:translateX(-50%);border-radius:50%;pointer-events:none}
+.logo-dust:before{width:78%;height:42%;background:radial-gradient(ellipse at center,rgba(53,185,216,.23),rgba(15,93,112,.10) 38%,transparent 72%);filter:blur(24px);animation:dustCloud 2.25s ease-out both}
+.logo-dust:after{width:56%;height:68%;background:linear-gradient(180deg,rgba(59,196,226,.19),rgba(15,93,112,.06) 50%,transparent);filter:blur(18px);animation:dustBeam 2.3s ease-out both}
 @keyframes logoDropIn{
-  0%{opacity:0;transform:translateY(-62vh) scale(.88);filter:brightness(3.4) saturate(.35) drop-shadow(0 0 75px rgba(92,220,255,.95))}
-  58%{opacity:1;transform:translateY(18px) scale(1.035);filter:brightness(2.15) saturate(.65) drop-shadow(0 0 58px rgba(70,198,230,.78))}
-  78%{transform:translateY(-7px) scale(.995);filter:brightness(1.35) saturate(.88) drop-shadow(0 0 28px rgba(47,160,188,.42))}
+  0%{opacity:0;transform:translateY(-68vh) rotateX(-10deg) scale(.86);filter:brightness(3.6) saturate(.45) drop-shadow(0 0 88px rgba(92,220,255,.98))}
+  48%{opacity:.96;transform:translateY(30px) rotateX(1deg) scale(1.045);filter:brightness(2.35) saturate(.7) drop-shadow(0 0 62px rgba(70,198,230,.82))}
+  72%{opacity:1;transform:translateY(-11px) scale(.992);filter:brightness(1.42) saturate(.9) drop-shadow(0 0 30px rgba(47,160,188,.46))}
   100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1) saturate(1) drop-shadow(0 0 0 rgba(0,0,0,0))}
+}
+@keyframes dustLayerIn{0%{opacity:0}8%{opacity:1}76%{opacity:.92}100%{opacity:0}}
+@keyframes dustCloud{0%{opacity:0;transform:translateX(-50%) translateY(-90px) scale(.55)}22%{opacity:.9}68%{opacity:.46;transform:translateX(-50%) translateY(120px) scale(1.18)}100%{opacity:0;transform:translateX(-50%) translateY(210px) scale(1.45)}}
+@keyframes dustBeam{0%{opacity:0;transform:translateX(-50%) translateY(-80px) scaleY(.4)}28%{opacity:.85}78%{opacity:.24;transform:translateX(-50%) translateY(150px) scaleY(1.2)}100%{opacity:0;transform:translateX(-50%) translateY(230px) scaleY(1.4)}}
+@keyframes dustParticle{
+  0%{opacity:0;transform:translate3d(var(--dx),var(--dy0),var(--z)) scale(.2)}
+  14%{opacity:var(--o)}
+  72%{opacity:calc(var(--o) * .78)}
+  100%{opacity:0;transform:translate3d(calc(var(--dx) * -0.35),var(--dy1),var(--z)) scale(1.45)}
 }
 .gate-interior,.gate-films{display:none}
 .gate-interior.unlocked,.gate-films.unlocked{display:block}
 .door-scene,.camera-scene{cursor:pointer}
-@media (prefers-reduced-motion:reduce){.logo-stage.logo-entry{animation:none}}
+@media (prefers-reduced-motion:reduce){.logo-stage.logo-entry{animation:none}.logo-dust,.logo-dust span,.logo-dust:before,.logo-dust:after{animation:none!important;display:none}}
 
 .rotate-hint{margin-top:-8px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42)}
 .hero h1{font-size:clamp(36px,6vw,86px);line-height:.95;letter-spacing:-.055em;margin:18px 0 0;font-weight:640}.hero p{max-width:720px;margin:20px auto 0;color:rgba(255,255,255,.66);font-size:clamp(15px,1.7vw,20px);line-height:1.75}
@@ -105,6 +120,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
   <div class="hero-content">
     <div class="eyebrow" data-i18n="eyebrow">Architectural Visualization Portfolio · 2026</div>
     <div class="logo-stage logo-entry" id="logoStage" aria-label="Interactive 360 degree logo">
+      <div class="logo-dust" id="logoDust" aria-hidden="true"></div>
       <div class="logo-object" id="logoObject">
         <div class="logo-base-shadow" aria-hidden="true"></div>
         <div class="logo-depth-stack" id="logoDepthStack" aria-hidden="true"></div>
@@ -199,8 +215,8 @@ const nav=document.getElementById('nav'); const reduced=matchMedia('(prefers-red
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}); document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// 360 logo drag
-const stage=document.getElementById('logoStage'), logo=document.getElementById('logoObject'); let rx=-3,ry=0,drag=false,sx=0,sy=0,orx=0,ory=0;
+// 360 logo drag + cinematic dust + slow automatic rotation
+const stage=document.getElementById('logoStage'), logo=document.getElementById('logoObject'); let rx=-3,ry=0,drag=false,sx=0,sy=0,orx=0,ory=0,autoReady=false,lastAuto=performance.now();
 const depthStack=document.getElementById('logoDepthStack');
 if(depthStack && !depthStack.childElementCount){
   const totalSlices=18;
@@ -216,8 +232,44 @@ if(depthStack && !depthStack.childElementCount){
     depthStack.appendChild(slice);
   }
 }
-const applyLogo=()=>{logo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; const nx=Math.max(-1,Math.min(1,ry/70)), ny=Math.max(-1,Math.min(1,rx/70)); stage.style.setProperty('--shine-x',`${50 + nx*24}%`); stage.style.setProperty('--shine-y',`${34 - ny*18}%`); stage.style.setProperty('--edge-alpha',`${0.22 + Math.abs(nx)*0.48}`)}; applyLogo(); stage.addEventListener('animationend',()=>stage.classList.remove('logo-entry'),{once:true});
-if(!reduced){stage.addEventListener('pointerdown',e=>{drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;stage.setPointerCapture(e.pointerId)});stage.addEventListener('pointermove',e=>{if(drag){ry=ory+(e.clientX-sx)*.58;rx=Math.max(-75,Math.min(75,orx-(e.clientY-sy)*.38))}else{const r=stage.getBoundingClientRect();ry=((e.clientX-r.left)/r.width-.5)*42;rx=-((e.clientY-r.top)/r.height-.5)*20}applyLogo()});stage.addEventListener('pointerup',e=>{drag=false;stage.classList.remove('dragging');try{stage.releasePointerCapture(e.pointerId)}catch{}})}
+
+const dust=document.getElementById('logoDust');
+if(dust && !reduced && !dust.childElementCount){
+  const particles=58;
+  for(let i=0;i<particles;i++){
+    const p=document.createElement('span');
+    const x=12+((i*37)%77), y=((i*19)%29)-8, size=2+((i*11)%8);
+    const dx=((i*23)%90)-45, dy0=-80-((i*17)%170), dy1=170+((i*29)%250);
+    const dur=(1.25+((i*13)%90)/100).toFixed(2), delay=((i*7)%52/100).toFixed(2), opacity=(.28+((i*31)%60)/100).toFixed(2);
+    p.style.setProperty('--x',x+'%');p.style.setProperty('--y',y+'%');p.style.setProperty('--s',size+'px');
+    p.style.setProperty('--dx',dx+'px');p.style.setProperty('--dy0',dy0+'px');p.style.setProperty('--dy1',dy1+'px');p.style.setProperty('--z',(((i*41)%70)-35)+'px');
+    p.style.setProperty('--dur',dur+'s');p.style.setProperty('--delay',delay+'s');p.style.setProperty('--o',opacity);
+    dust.appendChild(p);
+  }
+}
+
+const applyLogo=()=>{logo.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; const nx=Math.max(-1,Math.min(1,ry/70)), ny=Math.max(-1,Math.min(1,rx/70)); stage.style.setProperty('--shine-x',`${50 + nx*24}%`); stage.style.setProperty('--shine-y',`${34 - ny*18}%`); stage.style.setProperty('--edge-alpha',`${0.22 + Math.abs(nx)*0.48}`)}; applyLogo();
+
+stage.addEventListener('animationend',e=>{if(e.animationName==='logoDropIn'){stage.classList.remove('logo-entry');autoReady=true;lastAuto=performance.now()}},{once:true});
+if(reduced){autoReady=true;stage.classList.remove('logo-entry')}
+
+if(!reduced){
+  stage.addEventListener('pointerdown',e=>{drag=true;stage.classList.add('dragging');sx=e.clientX;sy=e.clientY;orx=rx;ory=ry;stage.setPointerCapture(e.pointerId)});
+  stage.addEventListener('pointermove',e=>{if(drag){ry=ory+(e.clientX-sx)*.58;rx=Math.max(-68,Math.min(68,orx-(e.clientY-sy)*.38));applyLogo()}});
+  stage.addEventListener('pointerup',e=>{drag=false;stage.classList.remove('dragging');lastAuto=performance.now();try{stage.releasePointerCapture(e.pointerId)}catch{}});
+  stage.addEventListener('pointercancel',()=>{drag=false;stage.classList.remove('dragging');lastAuto=performance.now()});
+}
+
+function autoRotateLogo(now){
+  if(autoReady && !drag){
+    const dt=Math.min(40,now-lastAuto);
+    ry+=dt*0.0065;
+    applyLogo();
+  }
+  lastAuto=now;
+  requestAnimationFrame(autoRotateLogo);
+}
+if(!reduced)requestAnimationFrame(autoRotateLogo);
 
 const projects={
 V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V1/V1-',pad:true},V2:{title:'Villa 02 · V-Ray Exterior',count:3,path:'assets/projects/V2/V2-'},V3:{title:'Villa 03 · V-Ray Exterior',count:3,path:'assets/projects/V3/V3-'},V4:{title:'Villa 04 · V-Ray Exterior',count:3,path:'assets/projects/V4/V4-'},V5:{title:'Villa 05 · AI Exterior',count:3,path:'assets/projects/V5/V5-'},V6:{title:'Villa 06 · AI Exterior',count:3,path:'assets/projects/V6/V6-'},V7:{title:'Villa 07 · AI Exterior',count:3,path:'assets/projects/V7/V7-'},
