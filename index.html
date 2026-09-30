@@ -522,10 +522,21 @@ function enterInterior(){
   doorScene.classList.add('open');
   setTimeout(()=>flash.classList.add('go'),650);
   setTimeout(()=>{
-    if(leaving){setVault(null);doorEnter.textContent='Open door · Enter Interior';document.getElementById('doorPortal').scrollIntoView({behavior:'auto'})}
-    else{if(!interiorUnlocked){interiorUnlocked=true;revealGroup(interiorSections)}setVault('interior');doorEnter.textContent='Open door · Exit Interior';document.getElementById('interiorFeatured').scrollIntoView({behavior:'auto'})}
+    if(leaving){
+      interiorSections.forEach(el=>{el.classList.remove('unlocked');el.setAttribute('aria-hidden','true')});
+      interiorUnlocked=false;
+      setVault(null);
+      doorEnter.textContent='Open door · Enter Interior';
+      document.getElementById('doorPortal').scrollIntoView({behavior:'auto'});
+      doorScene.classList.remove('open');
+    }else{
+      if(!interiorUnlocked){interiorUnlocked=true;revealGroup(interiorSections)}
+      setVault('interior');
+      doorEnter.textContent='Open door · Exit Interior';
+      document.getElementById('interiorFeatured').scrollIntoView({behavior:'auto'});
+    }
   },1020);
-  setTimeout(()=>{flash.classList.remove('go');doorScene.classList.remove('open')},1900);
+  setTimeout(()=>{flash.classList.remove('go');if(!leaving)doorScene.classList.remove('open')},1900);
 }
 doorEnter.addEventListener('click',e=>{e.stopPropagation();enterInterior()});
 doorScene.addEventListener('click',e=>{if(e.target!==doorEnter)enterInterior()});
