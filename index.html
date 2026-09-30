@@ -420,25 +420,27 @@ V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V
 IN1:{title:'IN1 · Main Living Space',count:7,path:'assets/interior/vray/IN1/IN1-',pad:true},IN2:{title:'IN2 · Bedroom Suite',count:3,path:'assets/interior/vray/IN2/IN2-',pad:true},IN3:{title:'IN3 · Statement Bathroom',count:4,path:'assets/interior/vray/IN3/IN3-',pad:true},IN4:{title:'IN4 · Classic Kitchen',count:4,path:'assets/interior/vray/IN4/IN4-',pad:true},IN5:{title:'IN5 · Bedroom & Study',count:4,path:'assets/interior/vray/IN5/IN5-',pad:true},INAI1:{title:'AI Interior 01 · Fashion Boutique',count:4,path:'assets/interior/ai/INAI1/INAI1-',pad:true},INAI2:{title:'AI Interior 02 · Double-Height Residence',count:4,path:'assets/interior/ai/INAI2/INAI2-',pad:true}
 };
 const gm=document.getElementById('galleryModal'),gallery=document.getElementById('gallery'),gt=document.getElementById('galleryTitle');
+// Verified texture-only references. No generic photo endpoints are used here.
 const materialMacroImages={
-  blackStone:'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1800&q=92',
-  concrete:'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=92',
-  plaster:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1800&q=92',
-  walnut:'https://images.unsplash.com/photo-1531835551805-16d864c8d311?auto=format&fit=crop&w=1800&q=92',
-  oak:'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1800&q=92',
-  aluminum:'https://images.unsplash.com/photo-1531053326607-9d349096d887?auto=format&fit=crop&w=1800&q=92',
-  travertine:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=92',
-  limestone:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=92',
-  glass:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=92',
-  paving:'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=92',
-  brass:'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=92'
+ blackStone:'https://aitextured.com/upload/iblock/41e/pzqmzdnhyd2mua2r8zcndwz7w03uzvel/6n3quj0zdr7acw22ftkyal0nu5xyld85.png',
+ concrete:'https://i.pinimg.com/originals/40/1e/64/401e64dfe7d6d35e9bacf5014f56126a.jpg',
+ plaster:'https://www.sketchuptextureclub.com/public/texture_d/44-fine-plaster-wall-texture-seamless-hr-202512220721.jpg',
+ walnut:'https://www.sketchuptextureclub.com/public/texture_d/04506-walnut-fine-wood-medium-pbr-texture-seamless-demo.jpg',
+ oak:'https://images.allsketchup.com/Natural-Oak-Wood-Texture_262.webp',
+ aluminum:'https://aitextured.com/upload/resize_cache/iblock/650/rqhtppu23zi4ht8pp0rhuxpnih3p7gge/720_720_1/v9361qggdaah3w2bs0e5l2xjc1fgq4gs.png',
+ travertine:'https://www.sketchuptextureclub.com/public/texture_d/0066-travertine-stone-texture-seamless-hr.jpg',
+ limestone:'https://www.sketchuptextureclub.com/public/texture_d/0066-travertine-stone-texture-seamless-hr.jpg',
+ glass:'https://aitextured.com/upload/iblock/b19/ptkj403e8tsv5rzhkt4ld6qb8xkcd3ix.png',
+ terracotta:'https://www.sketchuptextureclub.com/public/texture_d/0040-terracotta-handmade-tiles-texture-seamless-hr.jpg',
+ greyPaving:'https://i.pinimg.com/originals/40/1e/64/401e64dfe7d6d35e9bacf5014f56126a.jpg',
+ brass:'https://aitextured.com/upload/resize_cache/iblock/650/rqhtppu23zi4ht8pp0rhuxpnih3p7gge/720_720_1/v9361qggdaah3w2bs0e5l2xjc1fgq4gs.png'
 };
 const projectMacroType={
  V1:['blackStone','concrete','plaster','walnut','aluminum'],
  V2:['limestone','oak','plaster','aluminum','brass'],
  V3:['plaster','walnut','blackStone','aluminum','oak'],
- V4:['limestone','plaster','aluminum','brass','paving'],
- V5:['plaster','oak','aluminum','glass','paving'],
+ V4:['limestone','plaster','aluminum','brass','terracotta'],
+ V5:['plaster','oak','aluminum','glass','greyPaving'],
  V6:['plaster','oak','blackStone','aluminum','concrete'],
  V7:['travertine','walnut','brass','aluminum','glass']
 };
