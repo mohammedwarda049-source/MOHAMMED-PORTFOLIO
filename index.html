@@ -421,30 +421,28 @@ IN1:{title:'IN1 · Main Living Space',count:7,path:'assets/interior/vray/IN1/IN1
 };
 const gm=document.getElementById('galleryModal'),gallery=document.getElementById('gallery'),gt=document.getElementById('galleryTitle');
 const materialMacroImages={
-  blackStone:'https://www.vn.weber/files/vn/styles/1920x1080_resize/public/pictures/2020-11/da-marble-Marquina-Black-Negro.jpg.webp?itok=YItfHIU7',
-  concrete:'https://forms.utpaqp.edu.pe/en/board-form-concrete-wall_files/board-formed-concrete-wall.jpg',
-  plaster:'https://gd-hbimg.huaban.com/a4c1abb93a79c569a16562bac2d756196f3f50dc1ed3c-ovfQHz_fw658',
-  darkWood:'https://png.pngtree.com/background/20230614/original/pngtree-close-up-of-walnut-wood-texture-dark-natural-pattern-on-a-picture-image_3517770.jpg',
-  oak:'https://www.snekkerfabrikken.no/_next/image?q=100&url=%2Fhero%2Fhero-slide-4.jpg&w=3840',
-  aluminum:'https://hamiltoncs.com/wp-content/uploads/2020/04/M4254-Brushed-Black-Aluminum.jpg',
-  travertine:'https://media.istockphoto.com/id/2153961604/photo/travertine-beige-texture.jpg?s=2048x2048&w=is&k=20&c=rzbbkvlvqOP8t-XiQzcwKtVrKVWMjxEteWYxcE1z2HM=',
-  glass:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=90',
-  paving:'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1600&q=90',
-  warmLight:'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=1600&q=90'
+  blackStone:'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1800&q=92',
+  concrete:'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=92',
+  plaster:'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1800&q=92',
+  walnut:'https://images.unsplash.com/photo-1531835551805-16d864c8d311?auto=format&fit=crop&w=1800&q=92',
+  oak:'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1800&q=92',
+  aluminum:'https://images.unsplash.com/photo-1531053326607-9d349096d887?auto=format&fit=crop&w=1800&q=92',
+  travertine:'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=92',
+  limestone:'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=92',
+  glass:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=92',
+  paving:'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=92',
+  brass:'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=92'
 };
-function macroImageFor(name){
-  const n=name.toLowerCase();
-  if(n.includes('black veined')||n.includes('marble')||n.includes('charcoal accent'))return materialMacroImages.blackStone;
-  if(n.includes('concrete'))return materialMacroImages.concrete;
-  if(n.includes('walnut')||n.includes('smoked oak')||n.includes('timber soffit'))return materialMacroImages.darkWood;
-  if(n.includes('wood')||n.includes('oak')||n.includes('slat'))return materialMacroImages.oak;
-  if(n.includes('aluminum')||n.includes('metal'))return materialMacroImages.aluminum;
-  if(n.includes('stone')||n.includes('limestone')||n.includes('travertine'))return materialMacroImages.travertine;
-  if(n.includes('glass'))return materialMacroImages.glass;
-  if(n.includes('paving'))return materialMacroImages.paving;
-  if(n.includes('light')||n.includes('brass'))return materialMacroImages.warmLight;
-  return materialMacroImages.plaster;
-}
+const projectMacroType={
+ V1:['blackStone','concrete','plaster','walnut','aluminum'],
+ V2:['limestone','oak','plaster','aluminum','brass'],
+ V3:['plaster','walnut','blackStone','aluminum','oak'],
+ V4:['limestone','plaster','aluminum','brass','paving'],
+ V5:['plaster','oak','aluminum','glass','paving'],
+ V6:['plaster','oak','blackStone','aluminum','concrete'],
+ V7:['travertine','walnut','brass','aluminum','glass']
+};
+function macroImageFor(projectKey,index){return materialMacroImages[(projectMacroType[projectKey]||[])[index]]||materialMacroImages.plaster}
 const hotspotPositions={
 V1:[[22,58],[43,34],[62,48],[76,31],[84,61]],
 V2:[[19,56],[39,38],[58,61],[74,42],[86,57]],
@@ -468,7 +466,7 @@ function buildMaterialStudy(key,src,alt){
     b.addEventListener('click',e=>{
       e.stopPropagation();wrap.querySelectorAll('.material-hotspot').forEach(x=>x.classList.remove('active'));b.classList.add('active');
       name.textContent=m[0];note.textContent=m[2];
-      macro.style.backgroundImage='url("'+macroImageFor(m[0])+'")';macro.style.backgroundPosition='center';
+      macro.style.backgroundImage='url("'+macroImageFor(key,i)+'")';macro.style.backgroundPosition='center';
       const right=p[0]>62;card.style.left=right?'auto':Math.min(68,p[0]+4)+'%';card.style.right=right?(100-p[0]+4)+'%':'auto';card.style.top=Math.max(4,Math.min(68,p[1]-18))+'%';card.classList.add('open');
     });wrap.appendChild(b);
   });
