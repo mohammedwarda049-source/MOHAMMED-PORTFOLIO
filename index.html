@@ -62,7 +62,7 @@ a{color:inherit;text-decoration:none} button{font:inherit} img,video{display:blo
 .vault-exit{position:fixed;z-index:190;top:20px;left:50%;transform:translateX(-50%) translateY(-14px);padding:11px 18px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(8,16,19,.78);backdrop-filter:blur(16px);color:#fff;font:inherit;font-size:9px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:.3s ease}.vault-exit.show{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-14px)}
 body.vault-interior>header,body.vault-interior>#top,body.vault-interior>.about,body.vault-interior>#about,body.vault-interior>footer,body.vault-interior>.footer{display:none!important}
 body.vault-interior>main>section:not(.gate-interior):not(#interiorExitPortal){display:none!important}
-body.vault-films>header,body.vault-films>#top,body.vault-films>.about,body.vault-films>footer{display:none!important}
+body.vault-films>header,body.vault-films>#top,body.vault-films>.about,body.vault-films>#about,body.vault-films>footer,body.vault-films>.footer{display:none!important}
 body.vault-films>main>section:not(.gate-films):not(#filmExitPortal){display:none!important}
 body.vault-interior .gate-interior.unlocked,body.vault-films .gate-films.unlocked{display:block!important}
 #interiorExitPortal,#filmExitPortal{display:none}
@@ -235,6 +235,10 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <article class="film-card reveal" data-video="assets/videos/film-04-interior-ai.mp4" data-video-title="AI Interior Transformation"><img loading="lazy" decoding="async" src="assets/video-posters/film-04.jpg" alt="AI interior transformation"><div class="play-ring">▶</div><div class="film-meta"><h4 data-i18n="film4Title">AI Interior Transformation</h4><p data-i18n="film4Tag">Raw Space → Final Interior</p></div></article>
 <article class="film-card vertical reveal" data-video="assets/videos/film-05-construction-brand.mp4" data-video-title="Construction & Brand Finale"><img loading="lazy" decoding="async" src="assets/video-posters/film-05.jpg" alt="Construction film"><div class="play-ring">▶</div><div class="film-meta"><h4 data-i18n="film5Title">Construction & Brand Finale</h4><p data-i18n="film5Tag">Vertical Film · Build / Reveal / Brand</p></div></article>
 </div></div></section>
+<section class="film-portal" id="filmExitPortal" aria-label="Exit Films">
+  <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)">Film Vault · Exit</div><h3>Return through the lens.</h3><p>Use the same branded camera to leave the architectural films collection.</p></div>
+  <div class="camera-scene reveal" id="filmExitCamera" role="button" tabindex="0" aria-label="Exit Films"><div class="camera-object" id="filmExitCameraObject"><div class="camera-top"></div><div class="camera-body"><span class="camera-rec"></span><img class="camera-brand" src="assets/brand/logo-3d-final.png" alt="MW brand"></div><div class="camera-lens"></div></div><button class="camera-enter" id="filmExitButton">Deactivate Camera · Exit Films</button></div>
+</section>
 <button class="vault-exit" id="vaultExit" type="button" aria-label="Exit current collection">Exit Collection</button>
 </main>
 
@@ -562,14 +566,32 @@ interiorExitDoor.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')
 const cameraScene=document.getElementById('cameraScene'),cameraEnter=document.getElementById('cameraEnter'),cameraObject=document.getElementById('cameraObject');
 if(!reduced){cameraScene.addEventListener('pointermove',e=>{const r=cameraScene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;cameraObject.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg)`});cameraScene.addEventListener('pointerleave',()=>cameraObject.style.transform='rotateY(0) rotateX(0)')}
 function enterFilms(){
-  const leaving=document.body.classList.contains('vault-films');
+  if(document.body.classList.contains('vault-films'))return;
   cameraScene.classList.add('activated');flash.classList.add('go');
   setTimeout(()=>{
-    if(leaving){setVault(null);cameraEnter.textContent='Activate Camera · Enter Films';document.getElementById('filmPortal').scrollIntoView({behavior:'auto'})}
-    else{if(!filmsUnlocked){filmsUnlocked=true;revealGroup(filmSections)}setVault('films');cameraEnter.textContent='Activate Camera · Exit Films';document.getElementById('films').scrollIntoView({behavior:'auto'})}
+    if(!filmsUnlocked){filmsUnlocked=true;revealGroup(filmSections)}
+    setVault('films');
+    document.getElementById('films').scrollIntoView({behavior:'auto'});
   },820);
   setTimeout(()=>{flash.classList.remove('go');cameraScene.classList.remove('activated')},1800);
 }
+const filmExitCamera=document.getElementById('filmExitCamera'),filmExitButton=document.getElementById('filmExitButton'),filmExitCameraObject=document.getElementById('filmExitCameraObject');
+if(!reduced){filmExitCamera.addEventListener('pointermove',e=>{const r=filmExitCamera.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;filmExitCameraObject.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg)`});filmExitCamera.addEventListener('pointerleave',()=>filmExitCameraObject.style.transform='rotateY(0) rotateX(0)')}
+function exitFilms(){
+  if(!document.body.classList.contains('vault-films'))return;
+  filmExitCamera.classList.add('activated');flash.classList.add('go');
+  setTimeout(()=>{
+    filmSections.forEach(el=>{el.classList.remove('unlocked');el.setAttribute('aria-hidden','true')});
+    filmsUnlocked=false;
+    setVault(null);
+    document.getElementById('filmPortal').scrollIntoView({behavior:'auto'});
+    filmExitCamera.classList.remove('activated');
+  },1080);
+  setTimeout(()=>flash.classList.remove('go'),1750);
+}
+filmExitButton.addEventListener('click',e=>{e.stopPropagation();exitFilms()});
+filmExitCamera.addEventListener('click',e=>{if(e.target!==filmExitButton)exitFilms()});
+filmExitCamera.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();exitFilms()}});
 vaultExit.addEventListener('click',()=>{
   const fromFilms=document.body.classList.contains('vault-films');
   flash.classList.add('go');
@@ -586,7 +608,7 @@ cameraScene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.pr
 // Navigation points to the portals, never directly into locked sections.
 document.querySelectorAll('[data-portal-nav]').forEach(link=>link.addEventListener('click',e=>{
   e.preventDefault();
-  const target=link.dataset.portalNav==='films'&&interiorUnlocked?'filmPortal':'doorPortal';
+  const target=link.dataset.portalNav==='films'?'filmPortal':'doorPortal';
   document.getElementById(target).scrollIntoView({behavior:reduced?'auto':'smooth'});
 }));
 
