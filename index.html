@@ -65,6 +65,7 @@ body.vault-interior>main>section:not(.gate-interior):not(#interiorExitPortal){di
 body.vault-films>header,body.vault-films>#top,body.vault-films>.about,body.vault-films>#about,body.vault-films>footer,body.vault-films>.footer{display:none!important}
 body.vault-films>main>section:not(.gate-films):not(#filmExitPortal){display:none!important}
 body.vault-interior .gate-interior.unlocked,body.vault-films .gate-films.unlocked{display:block!important}
+.film-vault-exit-icon{display:none;width:max-content;margin:34px auto 6px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:13px 20px;font:inherit;font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(12px);transition:.25s ease}.film-vault-exit-icon:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}body.vault-films .film-vault-exit-icon{display:flex;align-items:center;gap:9px}
 #interiorExitPortal,#filmExitPortal{display:none}
 body.vault-interior #interiorExitPortal,body.vault-films #filmExitPortal{display:block!important}
 body.vault-interior .project-rail,body.vault-films .project-rail{display:none!important}
@@ -235,6 +236,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <article class="film-card reveal" data-video="assets/videos/film-04-interior-ai.mp4" data-video-title="AI Interior Transformation"><img loading="lazy" decoding="async" src="assets/video-posters/film-04.jpg" alt="AI interior transformation"><div class="play-ring">▶</div><div class="film-meta"><h4 data-i18n="film4Title">AI Interior Transformation</h4><p data-i18n="film4Tag">Raw Space → Final Interior</p></div></article>
 <article class="film-card vertical reveal" data-video="assets/videos/film-05-construction-brand.mp4" data-video-title="Construction & Brand Finale"><img loading="lazy" decoding="async" src="assets/video-posters/film-05.jpg" alt="Construction film"><div class="play-ring">▶</div><div class="film-meta"><h4 data-i18n="film5Title">Construction & Brand Finale</h4><p data-i18n="film5Tag">Vertical Film · Build / Reveal / Brand</p></div></article>
 </div></div></section>
+<button class="film-vault-exit-icon" id="filmBottomExit" type="button" aria-label="Exit Films"><span aria-hidden="true">↩</span> Exit Films</button>
 <section class="film-portal" id="filmExitPortal" aria-label="Exit Films">
   <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)">Film Vault · Exit</div><h3>Return through the lens.</h3><p>Use the same branded camera to leave the architectural films collection.</p></div>
   <div class="camera-scene reveal" id="filmExitCamera" role="button" tabindex="0" aria-label="Exit Films"><div class="camera-object" id="filmExitCameraObject"><div class="camera-top"></div><div class="camera-body"><span class="camera-rec"></span><img class="camera-brand" src="assets/brand/logo-3d-final.png" alt="MW brand"></div><div class="camera-lens"></div></div><button class="camera-enter" id="filmExitButton">Deactivate Camera · Exit Films</button></div>
@@ -589,6 +591,7 @@ function exitFilms(){
   },1080);
   setTimeout(()=>flash.classList.remove('go'),1750);
 }
+document.getElementById('filmBottomExit').addEventListener('click',e=>{e.stopPropagation();exitFilms()});
 filmExitButton.addEventListener('click',e=>{e.stopPropagation();exitFilms()});
 filmExitCamera.addEventListener('click',e=>{if(e.target!==filmExitButton)exitFilms()});
 filmExitCamera.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();exitFilms()}});
