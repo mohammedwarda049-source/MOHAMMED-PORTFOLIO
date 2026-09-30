@@ -180,6 +180,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <article class="project reveal"><div class="project-card case-project" data-case-project="V5"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-1.jpg" alt="Villa 05"><div class="project-info"><div><div class="project-name">Villa 05</div><div class="project-tag">AI Visualization</div></div><div class="project-index">05</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V5/V5-3.jpg" alt=""></div></article>
 <article class="project reveal"><div class="project-card case-project" data-case-project="V6"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-1.jpg" alt="Villa 06"><div class="project-info"><div><div class="project-name">Villa 06</div><div class="project-tag">AI Visualization</div></div><div class="project-index">06</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V6/V6-3.jpg" alt=""></div></article>
 <article class="project reveal"><div class="project-card case-project" data-case-project="V7"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-1.jpg" alt="Villa 07"><div class="project-info"><div><div class="project-name">Villa 07</div><div class="project-tag">AI Visualization</div></div><div class="project-index">07</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V7/V7-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V8"><img loading="lazy" decoding="async" src="assets/projects/V8/1.jpg" alt="Villa 08"><div class="project-info"><div><div class="project-name">Villa 08</div><div class="project-tag">AI Visualization</div></div><div class="project-index">08</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V8/2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V8/3.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V8/4.jpg" alt=""></div></article>
 </div></div></section>
 
 <section class="portal" id="doorPortal">
@@ -338,6 +339,13 @@ const projectExperience={
     ['Black Aluminum','#252a2c','Window systems'],
     ['Clear Glass','#a8bdc2','Full-height glazing']
   ]},
+  V8:{index:'08',title:'Villa 08',meta:'AI Exterior',side:'right',materials:[
+    ['Warm White Plaster','#e3ddd2','Textured mineral façade finish'],
+    ['Dark Walnut','#5b4638','Feature wall / vertical cladding'],
+    ['Black Aluminum','#252829','Window and door frames'],
+    ['Clear Architectural Glass','#9eb4ba','Full-height glazing'],
+    ['Light Stone Paving','#cfc6b8','Exterior terrace / hardscape']
+  ]},
   IN1:{index:'IN1',title:'Warm Minimal Living',meta:'V-Ray Interior',side:'right',materials:[
     ['Warm Greige Panels','#aaa094','Wall / millwork tone'],
     ['Brushed Grey Wood','#746c62','Media wall texture'],
@@ -416,7 +424,7 @@ const heroObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){r
 heroObs.observe(document.getElementById('top'));
 
 const projects={
-V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V1/V1-',pad:true},V2:{title:'Villa 02 · V-Ray Exterior',count:3,path:'assets/projects/V2/V2-'},V3:{title:'Villa 03 · V-Ray Exterior',count:3,path:'assets/projects/V3/V3-'},V4:{title:'Villa 04 · V-Ray Exterior',count:3,path:'assets/projects/V4/V4-'},V5:{title:'Villa 05 · AI Exterior',count:3,path:'assets/projects/V5/V5-'},V6:{title:'Villa 06 · AI Exterior',count:3,path:'assets/projects/V6/V6-'},V7:{title:'Villa 07 · AI Exterior',count:3,path:'assets/projects/V7/V7-'},
+V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V1/V1-',pad:true},V2:{title:'Villa 02 · V-Ray Exterior',count:3,path:'assets/projects/V2/V2-'},V3:{title:'Villa 03 · V-Ray Exterior',count:3,path:'assets/projects/V3/V3-'},V4:{title:'Villa 04 · V-Ray Exterior',count:3,path:'assets/projects/V4/V4-'},V5:{title:'Villa 05 · AI Exterior',count:3,path:'assets/projects/V5/V5-'},V6:{title:'Villa 06 · AI Exterior',count:3,path:'assets/projects/V6/V6-'},V7:{title:'Villa 07 · AI Exterior',count:3,path:'assets/projects/V7/V7-'},V8:{title:'Villa 08 · AI Exterior',count:4,path:'assets/projects/V8/',names:['1.jpg','2.jpg','3.jpg','4.jpg']},
 IN1:{title:'IN1 · Main Living Space',count:7,path:'assets/interior/vray/IN1/IN1-',pad:true},IN2:{title:'IN2 · Bedroom Suite',count:3,path:'assets/interior/vray/IN2/IN2-',pad:true},IN3:{title:'IN3 · Statement Bathroom',count:4,path:'assets/interior/vray/IN3/IN3-',pad:true},IN4:{title:'IN4 · Classic Kitchen',count:4,path:'assets/interior/vray/IN4/IN4-',pad:true},IN5:{title:'IN5 · Bedroom & Study',count:4,path:'assets/interior/vray/IN5/IN5-',pad:true},INAI1:{title:'AI Interior 01 · Fashion Boutique',count:4,path:'assets/interior/ai/INAI1/INAI1-',pad:true},INAI2:{title:'AI Interior 02 · Double-Height Residence',count:4,path:'assets/interior/ai/INAI2/INAI2-',pad:true}
 };
 const gm=document.getElementById('galleryModal'),gallery=document.getElementById('gallery'),gt=document.getElementById('galleryTitle');
@@ -428,6 +436,7 @@ V4:[[20,58],[40,36],[59,54],[75,34],[86,59]],
 V5:[[18,57],[37,36],[56,60],[73,39],[85,55]],
 V6:[[20,55],[40,34],[58,58],[74,37],[85,57]],
 V7:[[18,58],[38,35],[57,56],[73,36],[85,54]],
+V8:[[59,55],[39,39],[72,38],[22,46],[46,80]],
 IN1:[[18,42],[39,55],[58,62],[73,43],[86,29]],
 IN2:[[20,37],[42,48],[60,31],[73,68],[86,55]],
 IN3:[[18,57],[38,35],[57,62],[73,40],[86,25]],
@@ -465,7 +474,7 @@ function buildMaterialStudy(key,src,alt){
   wrap.addEventListener('click',e=>{if(e.target===wrap||e.target===im){card.classList.remove('open');info.classList.remove('open');infoBtn.textContent='Project Info +';wrap.querySelectorAll('.material-hotspot').forEach(x=>x.classList.remove('active'))}});
   return wrap;
 }
-function openProject(key){const p=projects[key];if(!p)return;gt.textContent=p.title;gallery.innerHTML='';for(let i=1;i<=p.count;i++){const n=p.pad?String(i).padStart(2,'0'):i;const src=p.path+n+'.jpg';if(i===1&&projectExperience[key]){gallery.appendChild(buildMaterialStudy(key,src,p.title+' '+i));continue}const im=document.createElement('img');im.src=src;im.alt=p.title+' '+i;if(i===1&&p.count>3)im.classList.add('wide');gallery.appendChild(im)}gm.classList.add('open');gm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'} document.querySelectorAll('[data-project]').forEach(el=>el.addEventListener('click',()=>openProject(el.dataset.project)));
+function openProject(key){const p=projects[key];if(!p)return;gt.textContent=p.title;gallery.innerHTML='';for(let i=1;i<=p.count;i++){const n=p.pad?String(i).padStart(2,'0'):i;const src=p.names?p.path+p.names[i-1]:p.path+n+'.jpg';if(i===1&&projectExperience[key]){gallery.appendChild(buildMaterialStudy(key,src,p.title+' '+i));continue}const im=document.createElement('img');im.src=src;im.alt=p.title+' '+i;if(i===1&&p.count>3)im.classList.add('wide');gallery.appendChild(im)}gm.classList.add('open');gm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'} document.querySelectorAll('[data-project]').forEach(el=>el.addEventListener('click',()=>openProject(el.dataset.project)));
 
 // Exterior villa images: open the matching full project gallery from either the hero image or its thumbnails.
 document.querySelectorAll('.project').forEach(project=>{
