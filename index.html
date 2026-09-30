@@ -60,10 +60,13 @@ a{color:inherit;text-decoration:none} button{font:inherit} img,video{display:blo
 .gate-interior.unlocked,.gate-films.unlocked{display:block}
 .door-scene,.camera-scene{cursor:pointer}
 .vault-exit{position:fixed;z-index:190;top:20px;left:50%;transform:translateX(-50%) translateY(-14px);padding:11px 18px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(8,16,19,.78);backdrop-filter:blur(16px);color:#fff;font:inherit;font-size:9px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:.3s ease}.vault-exit.show{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-14px)}
-body.vault-interior>header,body.vault-interior>#top,body.vault-interior>main>section:not(.gate-interior):not(#doorPortal),body.vault-interior>footer{display:none!important}
-body.vault-films>header,body.vault-films>#top,body.vault-films>main>section:not(.gate-films):not(#filmPortal),body.vault-films>footer{display:none!important}
+body.vault-interior>header,body.vault-interior>#top,body.vault-interior>.about,body.vault-interior>footer{display:none!important}
+body.vault-interior>main>section:not(.gate-interior):not(#interiorExitPortal){display:none!important}
+body.vault-films>header,body.vault-films>#top,body.vault-films>.about,body.vault-films>footer{display:none!important}
+body.vault-films>main>section:not(.gate-films):not(#filmExitPortal){display:none!important}
 body.vault-interior .gate-interior.unlocked,body.vault-films .gate-films.unlocked{display:block!important}
-body.vault-interior .film-portal{display:block!important}
+#interiorExitPortal,#filmExitPortal{display:none}
+body.vault-interior #interiorExitPortal,body.vault-films #filmExitPortal{display:block!important}
 body.vault-interior .project-rail,body.vault-films .project-rail{display:none!important}
 @media (prefers-reduced-motion:reduce){.logo-stage.logo-entry{animation:none}.logo-dust,.logo-dust span,.logo-dust:before,.logo-dust:after{animation:none!important;display:none}}
 
@@ -213,6 +216,11 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <article class="project reveal" style="grid-column:span 6"><div class="project-card case-project" data-case-project="INAI1"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-01.jpg" alt="Fashion boutique"><div class="project-info"><div><div class="project-name" data-i18n="inAi1Name">Fashion Boutique</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 01</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-03.jpg" alt=""></div></article>
 <article class="project reveal" style="grid-column:span 6"><div class="project-card case-project" data-case-project="INAI2"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-01.jpg" alt="Double height residence"><div class="project-info"><div><div class="project-name" data-i18n="inAi2Name">Double-Height Residence</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-04.jpg" alt=""></div></article>
 </div></div></section>
+
+<section class="portal" id="interiorExitPortal" aria-label="Exit Interior">
+  <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)">Interior Vault · Exit</div><h3>Return through the architecture.</h3><p>Use the same architectural door to leave the interior collection.</p></div>
+  <div class="door-scene reveal" id="interiorExitDoor" role="button" tabindex="0" aria-label="Exit Interior"><div class="door-room"></div><div class="door-frame"></div><div class="door"><img class="door-logo" src="assets/brand/logo-3d-final.png" alt="MW logo"><span class="door-handle"></span></div><button class="door-enter" id="interiorExitButton">Close door · Exit Interior</button></div>
+</section>
 
 <section class="film-portal" id="filmPortal">
   <div class="portal-copy reveal"><div class="kicker" style="color:rgba(255,255,255,.45)" data-i18n="filmPortalKicker">Transition 02 · Still Image → Motion</div><h3 data-i18n="filmPortalTitle">Enter AI Motion.</h3><p data-i18n="filmPortalDesc">Activate the branded camera to move from still visualization into architectural films.</p></div>
@@ -518,29 +526,37 @@ function setVault(mode){
   vaultExit.textContent=mode==='films'?'Exit Films · Return to Interior':'Exit Interior · Return to Exterior';
 }
 function enterInterior(){
-  const leaving=document.body.classList.contains('vault-interior');
+  if(document.body.classList.contains('vault-interior'))return;
   doorScene.classList.add('open');
   setTimeout(()=>flash.classList.add('go'),650);
   setTimeout(()=>{
-    if(leaving){
-      interiorSections.forEach(el=>{el.classList.remove('unlocked');el.setAttribute('aria-hidden','true')});
-      interiorUnlocked=false;
-      setVault(null);
-      doorEnter.textContent='Open door · Enter Interior';
-      document.getElementById('doorPortal').scrollIntoView({behavior:'auto'});
-      doorScene.classList.remove('open');
-    }else{
-      if(!interiorUnlocked){interiorUnlocked=true;revealGroup(interiorSections)}
-      setVault('interior');
-      doorEnter.textContent='Open door · Exit Interior';
-      document.getElementById('interiorFeatured').scrollIntoView({behavior:'auto'});
-    }
+    if(!interiorUnlocked){interiorUnlocked=true;revealGroup(interiorSections)}
+    setVault('interior');
+    document.getElementById('interiorFeatured').scrollIntoView({behavior:'auto'});
   },1020);
-  setTimeout(()=>{flash.classList.remove('go');if(!leaving)doorScene.classList.remove('open')},1900);
+  setTimeout(()=>{flash.classList.remove('go');doorScene.classList.remove('open')},1900);
 }
 doorEnter.addEventListener('click',e=>{e.stopPropagation();enterInterior()});
 doorScene.addEventListener('click',e=>{if(e.target!==doorEnter)enterInterior()});
 doorScene.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enterInterior()}});
+const interiorExitDoor=document.getElementById('interiorExitDoor'),interiorExitButton=document.getElementById('interiorExitButton');
+function exitInterior(){
+  if(!document.body.classList.contains('vault-interior'))return;
+  interiorExitDoor.classList.add('open');
+  setTimeout(()=>flash.classList.add('go'),520);
+  setTimeout(()=>{
+    interiorSections.forEach(el=>{el.classList.remove('unlocked');el.setAttribute('aria-hidden','true')});
+    interiorUnlocked=false;
+    setVault(null);
+    document.getElementById('doorPortal').scrollIntoView({behavior:'auto'});
+    doorScene.classList.remove('open');
+    interiorExitDoor.classList.remove('open');
+  },1080);
+  setTimeout(()=>flash.classList.remove('go'),1750);
+}
+interiorExitButton.addEventListener('click',e=>{e.stopPropagation();exitInterior()});
+interiorExitDoor.addEventListener('click',e=>{if(e.target!==interiorExitButton)exitInterior()});
+interiorExitDoor.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();exitInterior()}});
 
 // Camera portal
 const cameraScene=document.getElementById('cameraScene'),cameraEnter=document.getElementById('cameraEnter'),cameraObject=document.getElementById('cameraObject');
