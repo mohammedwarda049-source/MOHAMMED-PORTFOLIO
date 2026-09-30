@@ -66,6 +66,13 @@ a{color:inherit;text-decoration:none} button{font:inherit} img,video{display:blo
 .hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}.pill{display:inline-flex;align-items:center;justify-content:center;min-width:170px;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.055);color:#fff;backdrop-filter:blur(12px);font-size:11px;letter-spacing:.12em;text-transform:uppercase}.pill.primary{background:#fff;color:#102026;border-color:#fff}
 .hero-foot{position:absolute;left:24px;right:24px;bottom:20px;display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.46)}
 
+/* INTERACTIVE PROJECT ID + MATERIAL PALETTE */
+.project-rail{position:fixed;left:18px;top:50%;z-index:108;display:grid;grid-template-columns:auto 1px minmax(0,190px);align-items:center;gap:12px;padding:11px 13px;border:1px solid rgba(255,255,255,.14);border-radius:18px;background:rgba(7,13,16,.72);backdrop-filter:blur(18px);color:#fff;opacity:0;transform:translate3d(-28px,-50%,0);pointer-events:none;transition:opacity .42s ease,transform .52s cubic-bezier(.2,.75,.2,1),left .4s ease,right .4s ease}.project-rail.active{opacity:1;transform:translate3d(0,-50%,0)}.project-rail.right{left:auto;right:18px;transform:translate3d(28px,-50%,0)}.project-rail.right.active{transform:translate3d(0,-50%,0)}.project-rail-index{font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.44);writing-mode:vertical-rl;transform:rotate(180deg)}.project-rail-line{height:62px;background:linear-gradient(transparent,rgba(69,184,211,.78),transparent)}.project-rail-kicker{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.46)}.project-rail-title{margin-top:4px;font-size:19px;line-height:1.05;font-weight:650;letter-spacing:-.025em}.project-rail-meta{margin-top:6px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.52)}
+.case-project{position:relative}.material-toggle{position:absolute;z-index:8;top:16px;right:16px;border:1px solid rgba(255,255,255,.22);background:rgba(7,13,16,.52);color:#fff;border-radius:999px;padding:10px 13px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(14px);transition:.28s ease}.material-toggle:hover,.material-toggle:focus-visible{background:rgba(7,13,16,.82);border-color:rgba(93,194,216,.6);outline:none}.material-panel{position:absolute;z-index:7;top:14px;right:14px;width:min(330px,calc(100% - 28px));padding:58px 16px 16px;border:1px solid rgba(255,255,255,.15);border-radius:22px;background:linear-gradient(180deg,rgba(8,16,19,.9),rgba(8,16,19,.78));backdrop-filter:blur(20px);color:#fff;opacity:0;transform:translateY(-8px) scale(.985);pointer-events:none;transition:opacity .32s ease,transform .38s ease}.case-project.material-open .material-panel{opacity:1;transform:none;pointer-events:auto}.material-title{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.46);margin-bottom:11px}.material-list{display:grid;gap:9px}.material-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.09)}.material-row:first-child{border-top:0}.material-swatch{width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.material-name{font-size:12px;font-weight:600;line-height:1.15}.material-note{margin-top:3px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.42)}.material-hex{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;color:rgba(255,255,255,.55)}.material-foot{margin-top:10px;font-size:9px;line-height:1.5;color:rgba(255,255,255,.38)}
+@media(max-width:900px){.project-rail{left:12px;right:12px;top:auto;bottom:14px;grid-template-columns:auto 1px minmax(0,1fr);transform:translateY(18px);border-radius:16px}.project-rail.right{left:12px;right:12px;transform:translateY(18px)}.project-rail.active,.project-rail.right.active{transform:none}.project-rail-index{writing-mode:horizontal-tb;transform:none}.project-rail-line{height:36px}.project-rail-title{font-size:16px}.material-toggle{top:10px;right:10px;padding:9px 11px}.material-panel{top:8px;right:8px;width:calc(100% - 16px);padding-top:52px}}
+@media(prefers-reduced-motion:reduce){.project-rail,.material-panel,.material-toggle{transition:none}}
+
+
 /* COMMON */
 .section{padding:110px 28px}.wrap{max-width:1440px;margin:0 auto}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:42px}.kicker{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:#5f6e72}.section h2{font-size:clamp(40px,6vw,92px);line-height:.92;letter-spacing:-.055em;margin:8px 0 0;font-weight:620}.section-desc{max-width:540px;line-height:1.78;color:#667579;margin:0 0 8px}.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}.reveal.in{opacity:1;transform:none}
 
@@ -116,6 +123,16 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
   </div>
 </nav>
 
+<div class="project-rail" id="projectRail" aria-live="polite" aria-hidden="true">
+  <div class="project-rail-index" id="projectRailIndex">01</div>
+  <div class="project-rail-line"></div>
+  <div class="project-rail-copy">
+    <div class="project-rail-kicker" id="projectRailKicker">PROJECT</div>
+    <div class="project-rail-title" id="projectRailTitle">Villa 01</div>
+    <div class="project-rail-meta" id="projectRailMeta">V-Ray Exterior</div>
+  </div>
+</div>
+
 <header class="hero" id="top">
   <div class="hero-orb one"></div><div class="hero-orb two"></div>
   <div class="hero-content">
@@ -144,7 +161,7 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <section class="section featured" id="exterior">
   <div class="wrap">
     <div class="section-head reveal"><div><div class="kicker" data-i18n="extKicker">01 · Exterior / Featured</div><h2 data-i18n="extTitle">Villa 01</h2></div><p class="section-desc" data-i18n="extDesc">The flagship exterior project is presented as a complete visual story, from the entrance and landscape to the rear courtyard and aerial view.</p></div>
-    <article class="feature-card reveal"><img src="assets/projects/V1/V1-01.jpg" alt="Villa 01"><div class="feature-meta"><div><div class="feature-title" data-i18n="signatureVilla">Signature Villa</div><div class="feature-sub" data-i18n="signatureSub">V-Ray Exterior Visualization · Featured Case Study</div></div><span class="feature-badge" data-i18n="frames13">13 selected frames</span></div></article>
+    <article class="feature-card reveal case-project" data-case-project="V1"><img src="assets/projects/V1/V1-01.jpg" alt="Villa 01"><div class="feature-meta"><div><div class="feature-title" data-i18n="signatureVilla">Signature Villa</div><div class="feature-sub" data-i18n="signatureSub">V-Ray Exterior Visualization · Featured Case Study</div></div><span class="feature-badge" data-i18n="frames13">13 selected frames</span></div></article>
     <div class="v1-strip reveal"><img loading="lazy" decoding="async" src="assets/projects/V1/V1-06.jpg" alt="Villa 01 rear"><img loading="lazy" decoding="async" src="assets/projects/V1/V1-08.jpg" alt="Villa 01 courtyard"><img loading="lazy" decoding="async" src="assets/projects/V1/V1-13.jpg" alt="Villa 01 aerial"></div>
     <div class="more-v1"><button class="text-btn" data-project="V1" data-i18n="viewStory">View full Villa 01 story →</button></div>
   </div>
@@ -152,16 +169,16 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 
 <section class="section collection" id="vrayExterior"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="vrayExtKicker">02 · Exterior / V-Ray</div><h2 data-i18n="vrayExtTitle">Rendered with control.</h2></div><p class="section-desc" data-i18n="vrayExtDesc">A controlled set of exterior projects developed with V-Ray, each presented through three defining views.</p></div>
 <div class="project-grid">
-<article class="project reveal"><div class="project-card" data-project="V2"><img loading="lazy" decoding="async" src="assets/projects/V2/V2-1.jpg" alt="Villa 02"><div class="project-info"><div><div class="project-name">Villa 02</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V2/V2-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V2/V2-3.jpg" alt=""></div></article>
-<article class="project reveal"><div class="project-card" data-project="V3"><img loading="lazy" decoding="async" src="assets/projects/V3/V3-1.jpg" alt="Villa 03"><div class="project-info"><div><div class="project-name">Villa 03</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">03</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V3/V3-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V3/V3-3.jpg" alt=""></div></article>
-<article class="project reveal"><div class="project-card" data-project="V4"><img loading="lazy" decoding="async" src="assets/projects/V4/V4-1.jpg" alt="Villa 04"><div class="project-info"><div><div class="project-name">Villa 04</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">04</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V4/V4-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V4/V4-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V2"><img loading="lazy" decoding="async" src="assets/projects/V2/V2-1.jpg" alt="Villa 02"><div class="project-info"><div><div class="project-name">Villa 02</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V2/V2-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V2/V2-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V3"><img loading="lazy" decoding="async" src="assets/projects/V3/V3-1.jpg" alt="Villa 03"><div class="project-info"><div><div class="project-name">Villa 03</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">03</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V3/V3-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V3/V3-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V4"><img loading="lazy" decoding="async" src="assets/projects/V4/V4-1.jpg" alt="Villa 04"><div class="project-info"><div><div class="project-name">Villa 04</div><div class="project-tag">V-Ray Exterior</div></div><div class="project-index">04</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V4/V4-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V4/V4-3.jpg" alt=""></div></article>
 </div></div></section>
 
 <section class="section collection ai" id="aiExterior"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="aiExtKicker">03 · Exterior / AI</div><h2 data-i18n="aiExtTitle">New visual workflows.</h2></div><p class="section-desc" data-i18n="aiExtDesc">AI-assisted exterior visualization is kept as a distinct collection while preserving the same studio identity.</p></div>
 <div class="project-grid">
-<article class="project reveal"><div class="project-card" data-project="V5"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-1.jpg" alt="Villa 05"><div class="project-info"><div><div class="project-name">Villa 05</div><div class="project-tag">AI Visualization</div></div><div class="project-index">05</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V5/V5-3.jpg" alt=""></div></article>
-<article class="project reveal"><div class="project-card" data-project="V6"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-1.jpg" alt="Villa 06"><div class="project-info"><div><div class="project-name">Villa 06</div><div class="project-tag">AI Visualization</div></div><div class="project-index">06</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V6/V6-3.jpg" alt=""></div></article>
-<article class="project reveal"><div class="project-card" data-project="V7"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-1.jpg" alt="Villa 07"><div class="project-info"><div><div class="project-name">Villa 07</div><div class="project-tag">AI Visualization</div></div><div class="project-index">07</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V7/V7-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V5"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-1.jpg" alt="Villa 05"><div class="project-info"><div><div class="project-name">Villa 05</div><div class="project-tag">AI Visualization</div></div><div class="project-index">05</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V5/V5-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V5/V5-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V6"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-1.jpg" alt="Villa 06"><div class="project-info"><div><div class="project-name">Villa 06</div><div class="project-tag">AI Visualization</div></div><div class="project-index">06</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V6/V6-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V6/V6-3.jpg" alt=""></div></article>
+<article class="project reveal"><div class="project-card case-project" data-case-project="V7"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-1.jpg" alt="Villa 07"><div class="project-info"><div><div class="project-name">Villa 07</div><div class="project-tag">AI Visualization</div></div><div class="project-index">07</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/projects/V7/V7-2.jpg" alt=""><img loading="lazy" decoding="async" src="assets/projects/V7/V7-3.jpg" alt=""></div></article>
 </div></div></section>
 
 <section class="portal" id="doorPortal">
@@ -171,22 +188,22 @@ html[dir="rtl"] .section-head,html[dir="rtl"] .feature-meta,html[dir="rtl"] .her
 <div class="portal-flash" id="portalFlash"></div>
 
 <section class="section interior-featured gate-interior" id="interiorFeatured" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inFeaturedKicker">04 · Interior / Featured</div><h2 data-i18n="inFeaturedTitle">Main Living Space</h2></div><p class="section-desc" data-i18n="inFeaturedDesc">IN1 is the primary interior project, presented as a continuous study of light, furniture, material texture and spatial atmosphere.</p></div>
-<div class="interior-hero reveal"><img loading="lazy" decoding="async" src="assets/interior/vray/IN1/IN1-01.jpg" alt="Main living interior"><div class="interior-hero-copy"><h3 data-i18n="in1Hero">Warm Minimal Living</h3><div>V-Ray Interior · Featured Space</div></div></div>
+<div class="interior-hero reveal case-project" data-case-project="IN1"><img loading="lazy" decoding="async" src="assets/interior/vray/IN1/IN1-01.jpg" alt="Main living interior"><div class="interior-hero-copy"><h3 data-i18n="in1Hero">Warm Minimal Living</h3><div>V-Ray Interior · Featured Space</div></div></div>
 <div class="story-stack"><aside class="story-sticky reveal"><h4 data-i18n="in1StoryTitle">A calm material story.</h4><p data-i18n="in1StoryDesc">Soft neutral upholstery, warm timber, controlled linear lighting and sculptural furniture are revealed progressively as the visitor scrolls.</p><button class="text-btn" data-project="IN1" data-i18n="viewInteriorStory">View all IN1 frames →</button></aside><div class="story-images"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-03.jpg" alt="Living room"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-07.jpg" alt="Living room overview"><img loading="lazy" decoding="async" class="reveal" src="assets/interior/vray/IN1/IN1-05.jpg" alt="Material detail"></div></div>
 </div></section>
 
 <section class="section interior-vray gate-interior" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" style="color:rgba(255,255,255,.48)" data-i18n="inVrayKicker">05 · Interior / V-Ray</div><h2 data-i18n="inVrayTitle">Rooms with distinct character.</h2></div><p class="section-desc" data-i18n="inVrayDesc">Bedroom, bathroom, kitchen and bedroom-study projects presented as focused interior case studies.</p></div>
 <div class="project-grid">
-<article class="project interior-card reveal"><div class="project-card" data-project="IN2"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-01.jpg" alt="Bedroom suite"><div class="project-info"><div><div class="project-name" data-i18n="in2Name">Bedroom Suite</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN2</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-03.jpg" alt=""></div></article>
-<article class="project interior-card reveal"><div class="project-card" data-project="IN3"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-01.jpg" alt="Bathroom"><div class="project-info"><div><div class="project-name" data-i18n="in3Name">Statement Bathroom</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN3</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-03.jpg" alt=""></div></article>
-<article class="project interior-card reveal"><div class="project-card" data-project="IN4"><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-01.jpg" alt="Kitchen"><div class="project-info"><div><div class="project-name" data-i18n="in4Name">Classic Kitchen</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN4</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-03.jpg" alt=""></div></article>
-<article class="project interior-card reveal"><div class="project-card" data-project="IN5"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-01.jpg" alt="Bedroom study"><div class="project-info"><div><div class="project-name" data-i18n="in5Name">Bedroom & Study</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN5</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-03.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-04.jpg" alt=""></div></article>
+<article class="project interior-card reveal"><div class="project-card case-project" data-case-project="IN2"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-01.jpg" alt="Bedroom suite"><div class="project-info"><div><div class="project-name" data-i18n="in2Name">Bedroom Suite</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN2</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN2/IN2-03.jpg" alt=""></div></article>
+<article class="project interior-card reveal"><div class="project-card case-project" data-case-project="IN3"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-01.jpg" alt="Bathroom"><div class="project-info"><div><div class="project-name" data-i18n="in3Name">Statement Bathroom</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN3</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN3/IN3-03.jpg" alt=""></div></article>
+<article class="project interior-card reveal"><div class="project-card case-project" data-case-project="IN4"><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-01.jpg" alt="Kitchen"><div class="project-info"><div><div class="project-name" data-i18n="in4Name">Classic Kitchen</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN4</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN4/IN4-03.jpg" alt=""></div></article>
+<article class="project interior-card reveal"><div class="project-card case-project" data-case-project="IN5"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-01.jpg" alt="Bedroom study"><div class="project-info"><div><div class="project-name" data-i18n="in5Name">Bedroom & Study</div><div class="project-tag">V-Ray Interior</div></div><div class="project-index">IN5</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-03.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/vray/IN5/IN5-04.jpg" alt=""></div></article>
 </div></div></section>
 
 <section class="section interior-ai gate-interior" aria-hidden="true"><div class="wrap"><div class="section-head reveal"><div><div class="kicker" data-i18n="inAiKicker">06 · Interior / AI</div><h2 data-i18n="inAiTitle">AI-driven interior concepts.</h2></div><p class="section-desc" data-i18n="inAiDesc">Commercial and residential interior concepts extend the portfolio into AI-assisted spatial storytelling.</p></div>
 <div class="project-grid">
-<article class="project reveal" style="grid-column:span 6"><div class="project-card" data-project="INAI1"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-01.jpg" alt="Fashion boutique"><div class="project-info"><div><div class="project-name" data-i18n="inAi1Name">Fashion Boutique</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 01</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-03.jpg" alt=""></div></article>
-<article class="project reveal" style="grid-column:span 6"><div class="project-card" data-project="INAI2"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-01.jpg" alt="Double height residence"><div class="project-info"><div><div class="project-name" data-i18n="inAi2Name">Double-Height Residence</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-04.jpg" alt=""></div></article>
+<article class="project reveal" style="grid-column:span 6"><div class="project-card case-project" data-case-project="INAI1"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-01.jpg" alt="Fashion boutique"><div class="project-info"><div><div class="project-name" data-i18n="inAi1Name">Fashion Boutique</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 01</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI1/INAI1-03.jpg" alt=""></div></article>
+<article class="project reveal" style="grid-column:span 6"><div class="project-card case-project" data-case-project="INAI2"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-01.jpg" alt="Double height residence"><div class="project-info"><div><div class="project-name" data-i18n="inAi2Name">Double-Height Residence</div><div class="project-tag">AI Interior</div></div><div class="project-index">AI 02</div></div></div><div class="project-thumbs"><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-02.jpg" alt=""><img loading="lazy" decoding="async" src="assets/interior/ai/INAI2/INAI2-04.jpg" alt=""></div></article>
 </div></div></section>
 
 <section class="film-portal gate-interior" id="filmPortal" aria-hidden="true">
@@ -269,6 +286,133 @@ if(!reduced){
   stage.addEventListener('pointercancel',()=>{drag=false;stage.classList.remove('dragging')});
 }
 
+
+const projectExperience={
+  V1:{index:'01',title:'Villa 01',meta:'V-Ray Exterior',side:'left',materials:[
+    ['Black Veined Stone','#17191d','Polished / dramatic veining'],
+    ['Board-Form Concrete','#777674','Raw architectural concrete'],
+    ['Off-White Plaster','#d7d5cf','Fine textured finish'],
+    ['Dark Walnut','#4b403b','Entrance door / warm contrast'],
+    ['Charcoal Aluminum','#25292b','Window frames']
+  ]},
+  V2:{index:'02',title:'Villa 02',meta:'V-Ray Exterior',side:'right',materials:[
+    ['Light Limestone','#ddd8cc','Warm ivory stone'],
+    ['Vertical Wood Slats','#9a7553','Natural warm timber'],
+    ['White Plaster','#e8e7e2','Smooth mineral finish'],
+    ['Black Aluminum','#252728','Frames / pergola'],
+    ['Warm Architectural Light','#f2cf93','Integrated linear light']
+  ]},
+  V3:{index:'03',title:'Villa 03',meta:'V-Ray Exterior',side:'left',materials:[
+    ['Warm White Plaster','#dedbd3','Matte façade finish'],
+    ['Smoked Oak','#665448','Vertical cladding'],
+    ['Charcoal Accent','#34383a','Stone / composite panel'],
+    ['Black Aluminum','#242829','Window systems'],
+    ['Warm Timber Soffit','#8d725c','Entrance ceiling']
+  ]},
+  V4:{index:'04',title:'Villa 04',meta:'V-Ray Exterior',side:'right',materials:[
+    ['Ivory Stone','#d8d2c6','Classical façade cladding'],
+    ['Warm White Stucco','#e4e0d8','Fine mineral finish'],
+    ['Charcoal Metal','#303437','Window frames'],
+    ['Soft Brass Light','#c9a76b','Warm lighting accents'],
+    ['Terracotta Paving','#9c6c50','Landscape hardscape']
+  ]},
+  V5:{index:'05',title:'Villa 05',meta:'AI Exterior',side:'left',materials:[
+    ['Warm White Plaster','#e7e0d4','Soft mineral surface'],
+    ['Oak Slats','#a57d58','Vertical timber rhythm'],
+    ['Black Aluminum','#222728','Large glazing frames'],
+    ['Clear Architectural Glass','#9fb4b8','Reflective neutral glazing'],
+    ['Warm Grey Paving','#aaa59d','Exterior floor finish']
+  ]},
+  V6:{index:'06',title:'Villa 06',meta:'AI Exterior',side:'right',materials:[
+    ['Warm White Plaster','#dedbd4','Matte façade finish'],
+    ['Medium Oak','#8a684e','Vertical cladding'],
+    ['Charcoal Stone','#292d2e','Dark accent wall'],
+    ['Black Aluminum','#232829','Window frames'],
+    ['Light Concrete','#b8b5ae','Exterior paving']
+  ]},
+  V7:{index:'07',title:'Villa 07',meta:'AI Exterior',side:'left',materials:[
+    ['Pale Beige Stone','#d8cbb9','Large-format cladding'],
+    ['Dark Walnut','#58483e','Entrance / vertical panels'],
+    ['Bronze Metal','#7a6250','Architectural trims'],
+    ['Black Aluminum','#252a2c','Window systems'],
+    ['Clear Glass','#a8bdc2','Full-height glazing']
+  ]},
+  IN1:{index:'IN1',title:'Warm Minimal Living',meta:'V-Ray Interior',side:'right',materials:[
+    ['Warm Greige Panels','#aaa094','Wall / millwork tone'],
+    ['Brushed Grey Wood','#746c62','Media wall texture'],
+    ['Light Stone','#c8c1b6','Hearth / low plinth'],
+    ['Ivory Bouclé','#ded9cf','Soft upholstery'],
+    ['Warm 3000K Light','#e7c48d','Ambient linear lighting']
+  ]},
+  IN2:{index:'IN2',title:'Bedroom Suite',meta:'V-Ray Interior',side:'left',materials:[
+    ['Soft White Paneling','#e6e2da','Classic wall moulding'],
+    ['Deep Teal Velvet','#1e4749','Headboard / bench'],
+    ['Brushed Brass','#b18a53','Lighting and trim'],
+    ['Warm Oak','#8c715c','Herringbone floor'],
+    ['Cream Textile','#d5ccbe','Bedding / rug']
+  ]},
+  IN3:{index:'IN3',title:'Statement Bathroom',meta:'V-Ray Interior',side:'right',materials:[
+    ['Burgundy Marble','#6c2f31','Feature wall / floor veins'],
+    ['Ivory Stone','#d8d1c7','Primary wall surface'],
+    ['Smoked Burgundy Glass','#52292a','Freestanding tub'],
+    ['Brushed Brass','#ae8a5c','Tapware / lighting'],
+    ['Warm White','#eee8df','Ceiling / sanitaryware']
+  ]},
+  IN4:{index:'IN4',title:'Classic Kitchen',meta:'V-Ray Interior',side:'left',materials:[
+    ['Warm White Lacquer','#ebe8e1','Cabinet fronts'],
+    ['White Stone','#dedbd4','Worktop / backsplash'],
+    ['Gold Veining','#b8a16d','Stone accent'],
+    ['Brushed Brass','#aa8b61','Handles / faucet'],
+    ['Light Oak','#c0aa8b','Flooring']
+  ]},
+  IN5:{index:'IN5',title:'Bedroom & Study',meta:'V-Ray Interior',side:'right',materials:[
+    ['Warm Oak Veneer','#7d634f','Feature wall / desk'],
+    ['Cream Upholstery','#d9d0c3','Bed / chair'],
+    ['Veined Stone','#b8aa99','Vertical feature strip'],
+    ['Black Metal','#222526','Linear trims / lighting'],
+    ['Soft Greige Textile','#b9afa3','Curtains / rug']
+  ]},
+  INAI1:{index:'AI 01',title:'Fashion Boutique',meta:'AI Interior',side:'left',materials:[
+    ['Warm Oak Veneer','#8b694f','Wall and desk fronts'],
+    ['Matte Black Metal','#252626','Frames / track lighting'],
+    ['Off-White Upholstery','#d7cfc4','Seating'],
+    ['Champagne Gold','#b28c50','Brand / accent metal'],
+    ['Warm 3000K Light','#e5bd80','Vertical illumination']
+  ]},
+  INAI2:{index:'AI 02',title:'Double-Height Residence',meta:'AI Interior',side:'right',materials:[
+    ['Green Veined Stone','#768274','Fireplace statement stone'],
+    ['Walnut Veneer','#705845','Tall wall panels'],
+    ['Soft Grey Cabinetry','#bbb9b4','Kitchen fronts'],
+    ['Black Aluminum','#24292c','Full-height glazing'],
+    ['Light Grey Stone','#bdbbb5','Floor finish']
+  ]}
+};
+
+const rail=document.getElementById('projectRail'),railIndex=document.getElementById('projectRailIndex'),railTitle=document.getElementById('projectRailTitle'),railMeta=document.getElementById('projectRailMeta');
+function setProjectRail(key){
+  const d=projectExperience[key]; if(!d)return;
+  railIndex.textContent=d.index;railTitle.textContent=d.title;railMeta.textContent=d.meta;
+  rail.classList.toggle('right',d.side==='right');rail.classList.add('active');rail.setAttribute('aria-hidden','false');
+}
+function makePalette(host,key){
+  const d=projectExperience[key]; if(!d||host.querySelector('.material-toggle'))return;
+  const btn=document.createElement('button');btn.type='button';btn.className='material-toggle';btn.textContent='Material Palette +';btn.setAttribute('aria-expanded','false');
+  const panel=document.createElement('div');panel.className='material-panel';
+  panel.innerHTML='<div class="material-title">Material & Color Study</div><div class="material-list">'+d.materials.map(m=>`<div class="material-row"><span class="material-swatch" style="background:${m[1]}"></span><div><div class="material-name">${m[0]}</div><div class="material-note">${m[2]}</div></div><span class="material-hex">${m[1]}</span></div>`).join('')+'</div><div class="material-foot">Visual material reading from the rendered image · palette values are approximate.</div>';
+  host.append(panel,btn);
+  btn.addEventListener('click',e=>{e.stopPropagation();const open=host.classList.toggle('material-open');btn.textContent=open?'Material Palette ×':'Material Palette +';btn.setAttribute('aria-expanded',String(open))});
+  panel.addEventListener('click',e=>e.stopPropagation());
+}
+document.querySelectorAll('[data-case-project]').forEach(el=>{
+  const key=el.dataset.caseProject;makePalette(el,key);
+});
+const projectObs=new IntersectionObserver(entries=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(visible)setProjectRail(visible.target.dataset.caseProject);
+},{rootMargin:'-22% 0px -42% 0px',threshold:[.12,.28,.45,.62]});
+document.querySelectorAll('[data-case-project]').forEach(el=>projectObs.observe(el));
+const heroObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){rail.classList.remove('active');rail.setAttribute('aria-hidden','true')}}),{threshold:.28});
+heroObs.observe(document.getElementById('top'));
 
 const projects={
 V1:{title:'Villa 01 · Featured V-Ray Exterior',count:13,path:'assets/projects/V1/V1-',pad:true},V2:{title:'Villa 02 · V-Ray Exterior',count:3,path:'assets/projects/V2/V2-'},V3:{title:'Villa 03 · V-Ray Exterior',count:3,path:'assets/projects/V3/V3-'},V4:{title:'Villa 04 · V-Ray Exterior',count:3,path:'assets/projects/V4/V4-'},V5:{title:'Villa 05 · AI Exterior',count:3,path:'assets/projects/V5/V5-'},V6:{title:'Villa 06 · AI Exterior',count:3,path:'assets/projects/V6/V6-'},V7:{title:'Villa 07 · AI Exterior',count:3,path:'assets/projects/V7/V7-'},
