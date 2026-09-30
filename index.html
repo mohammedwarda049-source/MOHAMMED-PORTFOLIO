@@ -421,6 +421,23 @@ IN1:{title:'IN1 · Main Living Space',count:7,path:'assets/interior/vray/IN1/IN1
 const gm=document.getElementById('galleryModal'),gallery=document.getElementById('gallery'),gt=document.getElementById('galleryTitle');
 function openProject(key){const p=projects[key];if(!p)return;gt.textContent=p.title;gallery.innerHTML='';for(let i=1;i<=p.count;i++){const n=p.pad?String(i).padStart(2,'0'):i;const im=document.createElement('img');im.src=p.path+n+'.jpg';im.alt=p.title+' '+i;if(i===1&&p.count>3)im.classList.add('wide');gallery.appendChild(im)}gm.classList.add('open');gm.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'} document.querySelectorAll('[data-project]').forEach(el=>el.addEventListener('click',()=>openProject(el.dataset.project)));
 
+// Exterior villa images: open the matching full project gallery from either the hero image or its thumbnails.
+document.querySelectorAll('.project').forEach(project=>{
+  const caseCard=project.querySelector('[data-case-project]');
+  const key=caseCard?.dataset.caseProject;
+  if(!key || !projects[key]) return;
+  const clickableImages=project.querySelectorAll('.project-card img, .project-thumbs img');
+  clickableImages.forEach(img=>{
+    img.style.cursor='zoom-in';
+    img.setAttribute('role','button');
+    img.setAttribute('tabindex','0');
+    img.setAttribute('aria-label','Open '+projects[key].title+' full gallery');
+    const open=()=>openProject(key);
+    img.addEventListener('click',e=>{e.stopPropagation();open()});
+    img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();open()}});
+  });
+});
+
 // Locked architectural portals: Interior and Films are revealed only through their branded icons.
 const interiorSections=[...document.querySelectorAll('.gate-interior')];
 const filmSections=[...document.querySelectorAll('.gate-films')];
